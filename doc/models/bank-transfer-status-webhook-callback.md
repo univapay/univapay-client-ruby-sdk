@@ -42,14 +42,8 @@ bank_transfer_status_webhook_callback = BankTransferStatusWebhookCallback.new(
     ),
     charge_metadata: GenericMetadata.new(
       order_id: 'order_12345'
-    ),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    )
+  )
 )
 ```
 

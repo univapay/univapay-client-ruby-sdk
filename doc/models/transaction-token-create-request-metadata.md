@@ -24,12 +24,7 @@ A free-form dictionary for custom metadata.
 ```ruby
 transaction_token_create_request_metadata = TransactionTokenCreateRequestMetadata.new(
   univapay_reference_id: 'ref-998877',
-  univapay_customer_id: '0fd29949-07d5-4a91-8eaf-fbce0897d944',
-  univapay_name: 'univapay-name6',
-  univapay_phone_number: 'univapay-phone-number0',
-  additional_properties: {
-    'exampleAdditionalProperty' => 'String8'
-  }
+  univapay_customer_id: '0fd29949-07d5-4a91-8eaf-fbce0897d944'
 )
 ```
 

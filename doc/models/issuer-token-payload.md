@@ -22,14 +22,6 @@ A dictionary containing necessary key-value pairs for sending the request.
 ## Example
 
 ```ruby
-issuer_token_payload = IssuerTokenPayload.new(
-  request_data: 'request_data0',
-  s_spcd: 'sSpcd0',
-  s_cptok: 'sCptok6',
-  s_terkn: 'sTerkn0',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+issuer_token_payload = IssuerTokenPayload.new
 ```
 

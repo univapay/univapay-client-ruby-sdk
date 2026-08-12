@@ -29,21 +29,9 @@ customs_declaration_webhook_error = CustomsDeclarationWebhookError.new(
   others: [
     CustomsDeclarationWebhookOtherError.new(
       type: 'related_item',
-      credentials_id: '000013b6-0000-0000-0000-000000000000',
-      message: [
-        'message4',
-        'message5',
-        'message6'
-      ],
-      item_name: 'charge',
-      additional_properties: {
-        'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-      }
+      item_name: 'charge'
     )
-  ],
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  ]
 )
 ```
 

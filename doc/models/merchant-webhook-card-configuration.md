@@ -39,14 +39,9 @@ merchant_webhook_card_configuration = MerchantWebhookCardConfiguration.new(
   enabled: true,
   debit_enabled: true,
   prepaid_enabled: false,
-  debit_authorization_enabled: false,
-  prepaid_authorization_enabled: false,
   foreign_cards_allowed: false,
   three_ds_required: true,
-  allow_direct_token_creation: false,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  allow_direct_token_creation: false
 )
 ```
 

@@ -39,7 +39,11 @@ subscription_list = SubscriptionList.new(
         type: 'charge',
         cardholder_name: 'taro yamada',
         email: 'taro@test.com',
-        brand: 'visa'
+        brand: 'visa',
+        gateway: 'gateway6',
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
       ),
       additional_properties: {
         'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
@@ -61,7 +65,11 @@ subscription_list = SubscriptionList.new(
         type: 'charge',
         cardholder_name: 'hanako suzuki',
         email: 'hanako@test.com',
-        brand: 'mastercard'
+        brand: 'mastercard',
+        gateway: 'gateway6',
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
       ),
       additional_properties: {
         'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')

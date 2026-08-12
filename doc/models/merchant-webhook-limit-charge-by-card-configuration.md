@@ -22,10 +22,7 @@ Per-card velocity limit configuration.
 ```ruby
 merchant_webhook_limit_charge_by_card_configuration = MerchantWebhookLimitChargeByCardConfiguration.new(
   quantity_of_charges: 5,
-  duration_window: 'PT24H',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  duration_window: 'PT24H'
 )
 ```
 

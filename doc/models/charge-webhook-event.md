@@ -42,14 +42,8 @@ charge_webhook_event = ChargeWebhookEvent.new(
     status: ChargeStatus::SUCCESSFUL,
     error: nil,
     mode: ChargeMode::TEST,
-    created_on: DateTimeHelper.from_rfc3339('2024-06-26T01:51:30.000000Z'),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    created_on: DateTimeHelper.from_rfc3339('2024-06-26T01:51:30.000000Z')
+  )
 )
 ```
 

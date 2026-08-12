@@ -36,17 +36,11 @@ token_webhook_event = TokenWebhookEvent.new(
     type: TransactionTokenType::RECURRING,
     confirmed: true,
     metadata: {
-      'customer_id' => nil
+      'customer_id' => 'cust_12345'
     },
     created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
-    updated_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    updated_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z')
+  )
 )
 ```
 

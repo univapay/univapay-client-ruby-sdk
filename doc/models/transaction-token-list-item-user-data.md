@@ -24,10 +24,7 @@ Transaction Token List Item User Data schema.
 transaction_token_list_item_user_data = TransactionTokenListItemUserData.new(
   cardholder_name: 'TARO YAMADA',
   email: 'user@example.com',
-  brand: 'visa',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  brand: 'visa'
 )
 ```
 

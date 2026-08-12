@@ -22,12 +22,7 @@ A free-form dictionary for custom metadata.
 
 ```ruby
 generic_metadata = GenericMetadata.new(
-  order_id: '12345',
-  univapay_name: 'univapay-name0',
-  univapay_phone_number: 'univapay-phone-number4',
-  additional_properties: {
-    'exampleAdditionalProperty' => 'String4'
-  }
+  order_id: '12345'
 )
 ```
 

@@ -37,9 +37,21 @@ charge_list = ChargeList.new(
       charged_amount_formatted: 1000,
       only_direct_currency: false,
       status: ChargeStatus::SUCCESSFUL,
-      error: PaymentError.new,
+      error: PaymentError.new(
+        code: 24,
+        message: 'message4',
+        detail: 'detail0',
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
+      ),
       metadata: GenericMetadata.new(
-        order_id: 'ORD-2001'
+        order_id: 'ORD-2001',
+        univapay_name: 'univapay-name8',
+        univapay_phone_number: 'univapay-phone-number2',
+        additional_properties: {
+          'exampleAdditionalProperty' => 'String4'
+        }
       ),
       mode: ChargeMode::TEST,
       created_on: DateTimeHelper.from_rfc3339('2024-06-25T07:29:12.854865Z'),
@@ -61,9 +73,21 @@ charge_list = ChargeList.new(
       charged_amount_formatted: 12.5,
       only_direct_currency: false,
       status: ChargeStatus::SUCCESSFUL,
-      error: PaymentError.new,
+      error: PaymentError.new(
+        code: 24,
+        message: 'message4',
+        detail: 'detail0',
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
+      ),
       metadata: GenericMetadata.new(
-        order_id: 'ORD-2002'
+        order_id: 'ORD-2002',
+        univapay_name: 'univapay-name8',
+        univapay_phone_number: 'univapay-phone-number2',
+        additional_properties: {
+          'exampleAdditionalProperty' => 'String4'
+        }
       ),
       mode: ChargeMode::TEST,
       created_on: DateTimeHelper.from_rfc3339('2024-06-25T07:19:19.507637Z'),

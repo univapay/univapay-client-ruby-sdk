@@ -24,26 +24,14 @@ Request payload for updating a transaction token.
 transaction_token_update_request = TransactionTokenUpdateRequest.new(
   email: 'new_email@test.com',
   metadata: GenericMetadata.new(
-    order_id: '12345',
-    univapay_name: 'univapay-name8',
-    univapay_phone_number: 'univapay-phone-number2',
-    additional_properties: {
-      'exampleAdditionalProperty' => 'String4'
-    }
+    order_id: '12345'
   ),
   data: TransactionTokenUpdateRequestData.new(
     cvv: '123',
     cardholder: 'TARO YAMADA',
-    card_number: 'card_number6',
     exp_month: 12,
-    exp_year: 2028,
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    exp_year: 2028
+  )
 )
 ```
 

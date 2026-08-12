@@ -43,12 +43,31 @@ transaction_token = TransactionToken.new(
   usage_limit: 'example',
   confirmed: true,
   metadata: {
-    'customer_id' => nil
+    'customer_id' => 'cust_12345'
   },
   created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z'),
   updated_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z'),
   last_used_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
-  data: nil,
+  data: TokenResponseCardData.new(
+    card: TokenResponseCardDataCard.new(
+      cardholder: 'TARO YAMADA',
+      exp_month: 12,
+      exp_year: 2026,
+      card_bin: 'card_bin0',
+      last_four: '4242',
+      brand: 'visa',
+      additional_properties: {
+        'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+      }
+    ),
+    billing: nil,
+    cvv_authorize: nil,
+    cvv_authorize_check: nil,
+    three_ds: nil,
+    additional_properties: {
+      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+    }
+  ),
   additional_properties: {
     'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
   }

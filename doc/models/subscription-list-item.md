@@ -59,10 +59,7 @@ subscription_list_item = SubscriptionListItem.new(
     cardholder_name: 'taro yamada',
     email: 'test@test.com',
     brand: 'visa'
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  )
 )
 ```
 

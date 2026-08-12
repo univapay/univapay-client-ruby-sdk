@@ -48,14 +48,8 @@ subscription_webhook_event = SubscriptionWebhookEvent.new(
     ),
     mode: ChargeMode::TEST,
     created_on: DateTimeHelper.from_rfc3339('2024-06-26T01:51:28.627023Z'),
-    period: SubscriptionPeriod::MONTHLY,
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    period: SubscriptionPeriod::MONTHLY
+  )
 )
 ```
 

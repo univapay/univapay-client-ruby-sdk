@@ -22,10 +22,7 @@ Monetary amount object serialized by backend config models.
 ```ruby
 merchant_webhook_money_amount = MerchantWebhookMoneyAmount.new(
   amount: 1000,
-  currency: 'JPY',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  currency: 'JPY'
 )
 ```
 

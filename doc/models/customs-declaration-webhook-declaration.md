@@ -26,10 +26,7 @@ customs_declaration_webhook_declaration = CustomsDeclarationWebhookDeclaration.n
   customs: 'TOKYO',
   merchant_customs_no: '1234567890',
   certificate_id: 'AB1234567',
-  certificate_name: 'TARO YAMADA',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  certificate_name: 'TARO YAMADA'
 )
 ```
 

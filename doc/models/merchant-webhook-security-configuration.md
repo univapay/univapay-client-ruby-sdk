@@ -32,15 +32,10 @@ Merchant-level fraud and refund safety settings.
 merchant_webhook_security_configuration = MerchantWebhookSecurityConfiguration.new(
   card_charge_cooldown: 'PT5M',
   subscription_cooldown: 'PT10M',
-  idempotent_card_charge_cooldown: 'idempotent_card_charge_cooldown6',
-  idempotent_subscription_cooldown: 'idempotent_subscription_cooldown0',
   restrict_ip_after_failed_charge: RestrictIpAfterFailedChargeConfig.new(
     enabled: true,
     count: 5,
-    cooldown: 'PT1H',
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    cooldown: 'PT1H'
   ),
   refund_percent_limit: 100,
   confirmation_required: false,
@@ -49,10 +44,7 @@ merchant_webhook_security_configuration = MerchantWebhookSecurityConfiguration.n
     enabled: true,
     period: 'monthly',
     rolling_window: true
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  )
 )
 ```
 

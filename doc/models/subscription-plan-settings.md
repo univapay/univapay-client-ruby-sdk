@@ -21,13 +21,6 @@ Configuration for limited-cycle subscriptions (Univapay side).
 ## Example
 
 ```ruby
-subscription_plan_settings = SubscriptionPlanSettings.new(
-  plan_type: PlanSettingsType::FIXED_CYCLES,
-  fixed_cycles: 212,
-  fixed_cycle_amount: 22,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+subscription_plan_settings = SubscriptionPlanSettings.new
 ```
 

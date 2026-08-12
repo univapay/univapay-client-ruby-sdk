@@ -40,10 +40,7 @@ token_response_card_data_card = TokenResponseCardDataCard.new(
   country: 'JP',
   category: 'standard',
   issuer: nil,
-  sub_brand: 'none',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  sub_brand: 'none'
 )
 ```
 

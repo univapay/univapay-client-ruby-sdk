@@ -27,11 +27,7 @@ refund_create_request = RefundCreateRequest.new(
   amount: 1000,
   currency: 'JPY',
   reason: RefundReasonRequest::CUSTOMER_REQUEST,
-  message: 'Customer returned item',
-  metadata: nil,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  message: 'Customer returned item'
 )
 ```
 

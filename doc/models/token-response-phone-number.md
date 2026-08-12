@@ -22,10 +22,7 @@ Token Response Phone Number schema.
 ```ruby
 token_response_phone_number = TokenResponsePhoneNumber.new(
   country_code: 81,
-  local_number: '08012341234',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  local_number: '08012341234'
 )
 ```
 

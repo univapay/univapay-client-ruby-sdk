@@ -28,12 +28,7 @@ Token Response Online Data schema.
 token_response_online_data = TokenResponseOnlineData.new(
   brand: BaseOnlineDataBrand::WE_CHAT_ONLINE,
   call_method: BaseOnlineDataCallMethod::WEB,
-  os_type: BaseOnlineDataOsType::ANDROID,
-  user_identifier: 'wechat_open_id_12345',
-  user_identifier_source: BaseOnlineDataUserIdentifierSource::PROVIDED,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  user_identifier: 'wechat_open_id_12345'
 )
 ```
 

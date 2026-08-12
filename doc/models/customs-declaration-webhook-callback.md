@@ -31,7 +31,6 @@ customs_declaration_webhook_callback = CustomsDeclarationWebhookCallback.new(
     charge_id: '11ef0000-0000-4000-8000-000000000001',
     merchant_id: '11ef0000-0000-4000-8000-000000000020',
     store_id: '11ef0000-0000-4000-8000-000000000022',
-    platform_id: '00000550-0000-0000-0000-000000000000',
     mode: 'test',
     gateway: 'wechat_online',
     declaration: CustomsDeclarationWebhookDeclaration.new(
@@ -47,14 +46,8 @@ customs_declaration_webhook_callback = CustomsDeclarationWebhookCallback.new(
       charge_transaction_id: 'wx_charge_12345'
     ),
     status: CustomsDeclarationWebhookStatus::SUCCESSFUL,
-    created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z')
+  )
 )
 ```
 

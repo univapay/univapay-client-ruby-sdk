@@ -28,16 +28,10 @@ token_create_konbini_data = TokenCreateKonbiniData.new(
   convenience_store: BaseKonbiniDataConvenienceStore::SEVEN_ELEVEN,
   phone_number: TokenCreatePhoneNumber.new(
     country_code: '81',
-    local_number: '08012341234',
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    local_number: '08012341234'
   ),
   expiration_period: 'P7D',
-  expiration_time_shift: '23:59:59+09:00',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  expiration_time_shift: '23:59:59+09:00'
 )
 ```
 

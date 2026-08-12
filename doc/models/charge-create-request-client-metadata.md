@@ -20,10 +20,7 @@ Charge Create Request Client Metadata schema.
 
 ```ruby
 charge_create_request_client_metadata = ChargeCreateRequestClientMetadata.new(
-  ip_address: '198.51.100.14',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  ip_address: '198.51.100.14'
 )
 ```
 

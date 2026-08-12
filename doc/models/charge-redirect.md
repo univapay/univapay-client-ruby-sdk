@@ -20,12 +20,6 @@ Charge Redirect schema.
 ## Example
 
 ```ruby
-charge_redirect = ChargeRedirect.new(
-  endpoint: 'endpoint2',
-  redirect_id: '00001f64-0000-0000-0000-000000000000',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+charge_redirect = ChargeRedirect.new
 ```
 

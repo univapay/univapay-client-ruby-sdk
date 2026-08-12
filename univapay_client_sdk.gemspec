@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'univapay-client-sdk'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.summary = 'SDK for using Univapay API'
   s.description = 'Use the Univapay Payments Client SDK to create & manage payments'
   s.authors = ['Univapay Developers']

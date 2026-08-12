@@ -24,10 +24,7 @@ merchant_webhook_qr_scan_configuration = MerchantWebhookQrScanConfiguration.new(
   enabled: true,
   forbidden_qr_scan_gateways: [
     'wechat'
-  ],
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  ]
 )
 ```
 

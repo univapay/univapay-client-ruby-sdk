@@ -21,13 +21,7 @@ CVV confirmation rules for recurring token charges.
 
 ```ruby
 merchant_webhook_recurring_cvv_confirmation_config = MerchantWebhookRecurringCvvConfirmationConfig.new(
-  enabled: false,
-  threshold: [
-    nil
-  ],
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  enabled: false
 )
 ```
 

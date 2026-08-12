@@ -20,10 +20,7 @@ Request body for updating a customs declaration. Backend patch handling keeps th
 
 ```ruby
 customs_declaration_patch_request = CustomsDeclarationPatchRequest.new(
-  merchant_customs_no: '1234567891',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  merchant_customs_no: '1234567891'
 )
 ```
 

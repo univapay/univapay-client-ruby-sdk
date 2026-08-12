@@ -23,15 +23,6 @@ Schedule settings applied to a subscription.
 ## Example
 
 ```ruby
-subscription_schedule_settings = SubscriptionScheduleSettings.new(
-  start_on: Date.iso8601('2016-03-13'),
-  zone_id: 'zone_id2',
-  preserve_end_of_month: false,
-  retry_interval: 'retry_interval6',
-  termination_mode: SubscriptionTerminationMode::IMMEDIATE,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+subscription_schedule_settings = SubscriptionScheduleSettings.new
 ```
 

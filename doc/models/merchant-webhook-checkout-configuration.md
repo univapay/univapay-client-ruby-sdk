@@ -22,20 +22,11 @@ Checkout field collection settings.
 ```ruby
 merchant_webhook_checkout_configuration = MerchantWebhookCheckoutConfiguration.new(
   ec_email: MerchantWebhookCheckoutToggle.new(
-    enabled: true,
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    enabled: true
   ),
   ec_products: MerchantWebhookCheckoutToggle.new(
-    enabled: true,
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    enabled: true
+  )
 )
 ```
 

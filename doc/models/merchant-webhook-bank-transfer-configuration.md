@@ -47,10 +47,7 @@ merchant_webhook_bank_transfer_configuration = MerchantWebhookBankTransferConfig
   charge_request_notification_enabled: true,
   deposit_received_notification_enabled: true,
   remind_notification_period: 'P2D',
-  remind_notification_enabled: true,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  remind_notification_enabled: true
 )
 ```
 

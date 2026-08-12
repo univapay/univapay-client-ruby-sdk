@@ -26,30 +26,15 @@ Request payload for updating a subscription.
 ```ruby
 subscription_update_request = SubscriptionUpdateRequest.new(
   transaction_token_id: '11ef3362-3700-c54a-9baa-6f7e6527c9d9',
-  amount: 34,
   metadata: GenericMetadata.new(
-    order_id: '12345',
-    univapay_name: 'univapay-name8',
-    univapay_phone_number: 'univapay-phone-number2',
-    additional_properties: {
-      'exampleAdditionalProperty' => 'String4'
-    }
+    order_id: '12345'
   ),
-  status: SubscriptionUpdateStatus::SUSPENDED,
   schedule_settings: SubscriptionUpdateScheduleSettings.new(
-    termination_mode: SubscriptionTerminationMode::ON_NEXT_PAYMENT,
-    start_on: DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
-    retry_interval: 'retry_interval2',
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    termination_mode: SubscriptionTerminationMode::ON_NEXT_PAYMENT
   ),
   next_payment: SubscriptionUpdateNextPayment.new(
     due_date: Date.iso8601('2030-01-01')
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  )
 )
 ```
 

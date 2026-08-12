@@ -21,13 +21,6 @@ Schedule settings that can be updated on a subscription.
 ## Example
 
 ```ruby
-subscription_update_schedule_settings = SubscriptionUpdateScheduleSettings.new(
-  termination_mode: SubscriptionTerminationMode::IMMEDIATE,
-  start_on: DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
-  retry_interval: 'retry_interval6',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+subscription_update_schedule_settings = SubscriptionUpdateScheduleSettings.new
 ```
 

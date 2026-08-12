@@ -22,10 +22,7 @@ Request payload for capturing an authorized charge.
 ```ruby
 charge_capture_request = ChargeCaptureRequest.new(
   amount: 1000,
-  currency: 'JPY',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  currency: 'JPY'
 )
 ```
 

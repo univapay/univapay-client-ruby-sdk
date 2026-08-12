@@ -33,15 +33,9 @@ merchant_webhook_subscription_plan_configuration = MerchantWebhookSubscriptionPl
   ],
   min_charge_amount: MerchantWebhookMoneyAmount.new(
     amount: 3000,
-    currency: 'JPY',
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    currency: 'JPY'
   ),
-  max_payout_period: 'P12M',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  max_payout_period: 'P12M'
 )
 ```
 

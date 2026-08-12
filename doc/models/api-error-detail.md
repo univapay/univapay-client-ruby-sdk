@@ -22,10 +22,7 @@ Structured detail entry describing a single API validation or business error.
 ```ruby
 api_error_detail = ApiErrorDetail.new(
   field: 'card_number',
-  reason: 'INVALID_CARD_NUMBER',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  reason: 'INVALID_CARD_NUMBER'
 )
 ```
 

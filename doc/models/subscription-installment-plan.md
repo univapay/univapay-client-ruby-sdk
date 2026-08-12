@@ -20,12 +20,6 @@ Configuration for credit card company side installments.
 ## Example
 
 ```ruby
-subscription_installment_plan = SubscriptionInstallmentPlan.new(
-  plan_type: InstallmentPlanType::REVOLVING,
-  fixed_cycles: InstallmentFixedCycles::CYCLES_12,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+subscription_installment_plan = SubscriptionInstallmentPlan.new
 ```
 

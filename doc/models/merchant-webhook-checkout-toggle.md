@@ -20,10 +20,7 @@ Checkout feature toggle.
 
 ```ruby
 merchant_webhook_checkout_toggle = MerchantWebhookCheckoutToggle.new(
-  enabled: true,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  enabled: true
 )
 ```
 

@@ -24,10 +24,7 @@ Base Bank Transfer Data schema.
 base_bank_transfer_data = BaseBankTransferData.new(
   brand: 'aozora_bank',
   expiration_period: 'PT168H',
-  expiration_time_shift: '23:59:59+09:00',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  expiration_time_shift: '23:59:59+09:00'
 )
 ```
 

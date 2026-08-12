@@ -22,10 +22,7 @@ Convenience-store payment settings.
 ```ruby
 merchant_webhook_convenience_configuration = MerchantWebhookConvenienceConfiguration.new(
   enabled: true,
-  expiration: 'P3D',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  expiration: 'P3D'
 )
 ```
 

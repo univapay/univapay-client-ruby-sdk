@@ -26,10 +26,7 @@ customs_declaration_webhook_result = CustomsDeclarationWebhookResult.new(
   approving_authority: 'TOKYO',
   trade_id: 'wx_trade_12345',
   transaction_id: 'wx_txn_12345',
-  charge_transaction_id: 'wx_charge_12345',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  charge_transaction_id: 'wx_charge_12345'
 )
 ```
 

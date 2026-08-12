@@ -20,10 +20,7 @@ Paidy payment settings.
 
 ```ruby
 merchant_webhook_paidy_configuration = MerchantWebhookPaidyConfiguration.new(
-  enabled: false,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  enabled: false
 )
 ```
 

@@ -25,17 +25,8 @@ merchant_webhook_recurring_token_configuration = MerchantWebhookRecurringTokenCo
   recurring_type: 'infinite',
   charge_wait_period: 'P7D',
   card_charge_cvv_confirmation: MerchantWebhookRecurringCvvConfirmationConfig.new(
-    enabled: false,
-    threshold: [
-      nil
-    ],
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    enabled: false
+  )
 )
 ```
 

@@ -24,10 +24,7 @@ Base Konbini Data schema.
 base_konbini_data = BaseKonbiniData.new(
   customer_name: 'Taro Yamada',
   convenience_store: BaseKonbiniDataConvenienceStore::SEVEN_ELEVEN,
-  expiration_period: 'P7D',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  expiration_period: 'P7D'
 )
 ```
 

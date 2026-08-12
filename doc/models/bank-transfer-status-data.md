@@ -46,10 +46,7 @@ bank_transfer_status_data = BankTransferStatusData.new(
   ),
   charge_metadata: GenericMetadata.new(
     order_id: 'order_12345'
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  )
 )
 ```
 

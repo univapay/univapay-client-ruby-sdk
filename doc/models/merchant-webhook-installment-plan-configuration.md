@@ -28,26 +28,17 @@ merchant_webhook_installment_plan_configuration = MerchantWebhookInstallmentPlan
   enabled: true,
   card_processor: CardProcessorInstallmentConfig.new(
     revolving: true,
-    fixed_cycle: true,
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    fixed_cycle: true
   ),
   supported_payment_types: [
     'card'
   ],
   min_charge_amount: MerchantWebhookMoneyAmount.new(
     amount: 3000,
-    currency: 'JPY',
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    currency: 'JPY'
   ),
   max_payout_period: 'P12M',
-  only_with_processor: true,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  only_with_processor: true
 )
 ```
 

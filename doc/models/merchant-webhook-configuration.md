@@ -52,13 +52,9 @@ merchant_webhook_configuration = MerchantWebhookConfiguration.new(
   flat_fees: [
     MerchantWebhookMoneyAmount.new(
       amount: 100,
-      currency: 'JPY',
-      additional_properties: {
-        'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-      }
+      currency: 'JPY'
     )
   ],
-  logo_url: 'logo_url6',
   country: 'JP',
   language: 'ja',
   display_time_zone: 'Asia/Tokyo',
@@ -215,10 +211,7 @@ merchant_webhook_configuration = MerchantWebhookConfiguration.new(
     remind_notification_enabled: true
   ),
   platform_credentials_enabled: true,
-  tagged_platform_credentials_enabled: false,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  tagged_platform_credentials_enabled: false
 )
 ```
 

@@ -21,16 +21,8 @@ Request body to create a cancel for a charge. Only `metadata` is accepted; all o
 ```ruby
 cancel_create_request = CancelCreateRequest.new(
   metadata: GenericMetadata.new(
-    order_id: 'ORD-987',
-    univapay_name: 'univapay-name8',
-    univapay_phone_number: 'univapay-phone-number2',
-    additional_properties: {
-      'exampleAdditionalProperty' => 'String4'
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    order_id: 'ORD-987'
+  )
 )
 ```
 

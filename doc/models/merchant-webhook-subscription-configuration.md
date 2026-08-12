@@ -28,10 +28,7 @@ merchant_webhook_subscription_configuration = MerchantWebhookSubscriptionConfigu
   failed_charges_to_cancel: 3,
   suspend_on_cancel: true,
   allow_merchant_amount_patch: false,
-  allow_merchant_due_date_patch: false,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  allow_merchant_due_date_patch: false
 )
 ```
 

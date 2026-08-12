@@ -20,12 +20,6 @@ Token Create Card Data Three Ds schema.
 ## Example
 
 ```ruby
-token_create_card_data_three_ds = TokenCreateCardDataThreeDs.new(
-  enabled: false,
-  redirect_endpoint: 'redirect_endpoint4',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+token_create_card_data_three_ds = TokenCreateCardDataThreeDs.new
 ```
 

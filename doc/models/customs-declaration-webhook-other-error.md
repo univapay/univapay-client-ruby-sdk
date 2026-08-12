@@ -24,16 +24,7 @@ Nested customs-processing error entry returned in `others`.
 ```ruby
 customs_declaration_webhook_other_error = CustomsDeclarationWebhookOtherError.new(
   type: 'related_item',
-  credentials_id: '00001b7c-0000-0000-0000-000000000000',
-  message: [
-    'message4',
-    'message5',
-    'message6'
-  ],
-  item_name: 'charge',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  item_name: 'charge'
 )
 ```
 

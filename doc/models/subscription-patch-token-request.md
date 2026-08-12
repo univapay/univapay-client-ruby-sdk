@@ -20,10 +20,7 @@ Request body for updating the payment method (transaction token) of a subscripti
 
 ```ruby
 subscription_patch_token_request = SubscriptionPatchTokenRequest.new(
-  transaction_token_id: '11ef3362-3700-c54a-9baa-6f7e6527c9d9',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  transaction_token_id: '11ef3362-3700-c54a-9baa-6f7e6527c9d9'
 )
 ```
 

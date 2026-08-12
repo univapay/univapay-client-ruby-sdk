@@ -31,15 +31,7 @@ Request payload for creating a charge.
 charge_create_request = ChargeCreateRequest.new(
   transaction_token_id: 'af834c88-7a8f-47ac-aee9-0386a0f98b0d',
   amount: 1000,
-  currency: 'JPY',
-  capture: false,
-  capture_at: DateTimeHelper.from_rfc3339('2016-03-13T12:52:32.123Z'),
-  merchant_transaction_id: 'merchant_transaction_id8',
-  metadata: nil,
-  client_metadata: nil,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  currency: 'JPY'
 )
 ```
 

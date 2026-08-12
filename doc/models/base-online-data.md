@@ -23,15 +23,6 @@ Base Online Data schema.
 ## Example
 
 ```ruby
-base_online_data = BaseOnlineData.new(
-  brand: BaseOnlineDataBrand::D_BARAI_ONLINE,
-  call_method: BaseOnlineDataCallMethod::WEB,
-  os_type: BaseOnlineDataOsType::ANDROID,
-  user_identifier: 'user_identifier6',
-  user_identifier_source: BaseOnlineDataUserIdentifierSource::PROVIDED,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+base_online_data = BaseOnlineData.new
 ```
 

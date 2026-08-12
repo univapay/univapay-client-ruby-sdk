@@ -22,10 +22,7 @@ Token Create Card Data Cvv Authorize schema.
 ```ruby
 token_create_card_data_cvv_authorize = TokenCreateCardDataCvvAuthorize.new(
   enabled: false,
-  currency: 'JPY',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  currency: 'JPY'
 )
 ```
 

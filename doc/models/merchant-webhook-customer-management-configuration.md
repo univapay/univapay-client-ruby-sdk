@@ -26,10 +26,7 @@ merchant_webhook_customer_management_configuration = MerchantWebhookCustomerMana
   default_roles: [
     'end_user'
   ],
-  default_mode: 'live',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  default_mode: 'live'
 )
 ```
 

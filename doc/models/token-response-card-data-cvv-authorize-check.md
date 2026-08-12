@@ -24,10 +24,7 @@ Token Response Card Data Cvv Authorize Check schema.
 token_response_card_data_cvv_authorize_check = TokenResponseCardDataCvvAuthorizeCheck.new(
   status: 'successful',
   charge_id: nil,
-  date: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z'),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  date: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z')
 )
 ```
 

@@ -26,10 +26,7 @@ store_list_item = StoreListItem.new(
   id: '11ef0000-0000-4000-8000-000000000022',
   name: 'Tokyo Store',
   merchant_name: 'Example Merchant',
-  created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z')
 )
 ```
 

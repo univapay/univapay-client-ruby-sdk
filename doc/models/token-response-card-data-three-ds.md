@@ -30,10 +30,7 @@ token_response_card_data_three_ds = TokenResponseCardDataThreeDs.new(
   redirect_endpoint: nil,
   redirect_id: nil,
   exempted: false,
-  error: nil,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  error: nil
 )
 ```
 

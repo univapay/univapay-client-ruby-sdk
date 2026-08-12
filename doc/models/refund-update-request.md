@@ -23,18 +23,9 @@ Request body for updating a refund. All fields are optional. Omitted fields are 
 ```ruby
 refund_update_request = RefundUpdateRequest.new(
   metadata: GenericMetadata.new(
-    order_id: '12345',
-    univapay_name: 'univapay-name8',
-    univapay_phone_number: 'univapay-phone-number2',
-    additional_properties: {
-      'exampleAdditionalProperty' => 'String4'
-    }
+    order_id: '12345'
   ),
-  message: 'Updated reason note',
-  reason: RefundReasonRequest::DUPLICATE,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  message: 'Updated reason note'
 )
 ```
 

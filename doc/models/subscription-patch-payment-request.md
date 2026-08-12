@@ -26,10 +26,7 @@ subscription_patch_payment_request = SubscriptionPatchPaymentRequest.new(
   due_date: Date.iso8601('2026-09-01'),
   is_paid: false,
   terminate_with_status: nil,
-  retry_interval: 'P3D',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  retry_interval: 'P3D'
 )
 ```
 

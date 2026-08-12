@@ -44,17 +44,40 @@ subscription = Subscription.new(
   amount: 1250,
   currency: 'USD',
   amount_formatted: 12.5,
-  schedule_settings: SubscriptionScheduleSettings.new,
+  schedule_settings: SubscriptionScheduleSettings.new(
+    start_on: Date.iso8601('2016-03-13'),
+    zone_id: 'zone_id8',
+    preserve_end_of_month: false,
+    retry_interval: 'retry_interval2',
+    termination_mode: SubscriptionTerminationMode::IMMEDIATE,
+    additional_properties: {
+      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+    }
+  ),
   only_direct_currency: false,
   first_charge_authorization_only: false,
   status: SubscriptionStatus::CURRENT,
   metadata: GenericMetadata.new(
-    order_id: '12345'
+    order_id: '12345',
+    univapay_name: 'univapay-name8',
+    univapay_phone_number: 'univapay-phone-number2',
+    additional_properties: {
+      'exampleAdditionalProperty' => 'String4'
+    }
   ),
   mode: ChargeMode::LIVE,
   created_on: DateTimeHelper.from_rfc3339('2024-06-26T01:51:28.627023Z'),
   period: SubscriptionPeriod::MONTHLY,
-  next_payment: SubscriptionNextPayment.new,
+  next_payment: SubscriptionNextPayment.new(
+    id: '00000110-0000-0000-0000-000000000000',
+    due_date: Date.iso8601('2016-03-13'),
+    zone_id: 'zone_id8',
+    amount: 126,
+    currency: 'currency8',
+    additional_properties: {
+      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+    }
+  ),
   additional_properties: {
     'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
   }

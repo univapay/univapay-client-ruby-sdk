@@ -24,10 +24,7 @@ Refund-limiting configuration based on sales history.
 merchant_webhook_limit_refund_by_sales_configuration = MerchantWebhookLimitRefundBySalesConfiguration.new(
   enabled: true,
   period: 'monthly',
-  rolling_window: true,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  rolling_window: true
 )
 ```
 

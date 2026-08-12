@@ -19,11 +19,6 @@ Charge Create Request Redirect schema.
 ## Example
 
 ```ruby
-charge_create_request_redirect = ChargeCreateRequestRedirect.new(
-  endpoint: 'endpoint6',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+charge_create_request_redirect = ChargeCreateRequestRedirect.new
 ```
 

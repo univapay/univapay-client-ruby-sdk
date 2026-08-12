@@ -20,12 +20,6 @@ Charge Three Ds schema.
 ## Example
 
 ```ruby
-charge_three_ds = ChargeThreeDs.new(
-  redirect_endpoint: 'redirect_endpoint4',
-  mode: 'mode8',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+charge_three_ds = ChargeThreeDs.new
 ```
 

@@ -35,14 +35,7 @@ subscription_create_request = SubscriptionCreateRequest.new(
   transaction_token_id: '11ef32a7-3a71-8662-803f-1bc27702eeec',
   amount: 1250,
   currency: 'USD',
-  initial_amount: 102,
-  period: SubscriptionPeriod::MONTHLY,
-  cyclical_period: 'cyclical_period4',
-  schedule_settings: nil,
-  installment_plan: nil,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  period: SubscriptionPeriod::MONTHLY
 )
 ```
 

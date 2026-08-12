@@ -26,15 +26,6 @@ Represents a single delivery attempt of a webhook event, including the payload s
 ## Example
 
 ```ruby
-webhook_event = WebhookEvent.new(
-  id: '00000188-0000-0000-0000-000000000000',
-  webhook_id: '000023ae-0000-0000-0000-000000000000',
-  event: WebhookTrigger::TOKEN_CREATED,
-  data: { 'key1' => 'val1', 'key2' => 'val2' },
-  successful: false,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+webhook_event = WebhookEvent.new
 ```
 

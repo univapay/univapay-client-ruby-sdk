@@ -35,10 +35,7 @@ token_response_card_data = TokenResponseCardData.new(
     country: 'JP',
     category: 'standard',
     issuer: nil,
-    sub_brand: 'none',
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    sub_brand: 'none'
   ),
   billing: TokenResponseCardDataBilling.new(
     line1: '1-1-1',
@@ -50,28 +47,19 @@ token_response_card_data = TokenResponseCardData.new(
     phone_number: TokenResponsePhoneNumber.new(
       country_code: 81,
       local_number: '08012341234'
-    ),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    )
   ),
   cvv_authorize: TokenResponseCardDataCvvAuthorize.new(
     enabled: true,
     status: 'successful',
     charge_id: nil,
     credentials_id: nil,
-    currency: 'JPY',
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    currency: 'JPY'
   ),
   cvv_authorize_check: TokenResponseCardDataCvvAuthorizeCheck.new(
     status: 'successful',
     charge_id: nil,
-    date: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z'),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
+    date: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z')
   ),
   three_ds: TokenResponseCardDataThreeDs.new(
     enabled: true,
@@ -79,14 +67,8 @@ token_response_card_data = TokenResponseCardData.new(
     redirect_endpoint: nil,
     redirect_id: nil,
     exempted: false,
-    error: nil,
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    error: nil
+  )
 )
 ```
 

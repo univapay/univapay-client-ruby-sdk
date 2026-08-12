@@ -30,15 +30,6 @@ Next scheduled payment details for a subscription.
 ## Example
 
 ```ruby
-subscription_next_payment = SubscriptionNextPayment.new(
-  id: '00002650-0000-0000-0000-000000000000',
-  due_date: Date.iso8601('2016-03-13'),
-  zone_id: 'zone_id4',
-  amount: 18,
-  currency: 'currency8',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+subscription_next_payment = SubscriptionNextPayment.new
 ```
 

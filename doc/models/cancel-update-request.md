@@ -21,16 +21,8 @@ Request body for updating a cancel. Only `metadata` is settable by merchants. Al
 ```ruby
 cancel_update_request = CancelUpdateRequest.new(
   metadata: GenericMetadata.new(
-    order_id: '12345',
-    univapay_name: 'univapay-name8',
-    univapay_phone_number: 'univapay-phone-number2',
-    additional_properties: {
-      'exampleAdditionalProperty' => 'String4'
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    order_id: '12345'
+  )
 )
 ```
 

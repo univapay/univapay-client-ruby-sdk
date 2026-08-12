@@ -24,15 +24,6 @@ Customer-facing payment method summary data.
 ## Example
 
 ```ruby
-subscription_user_data = SubscriptionUserData.new(
-  type: 'type2',
-  cardholder_name: 'cardholder_name6',
-  email: 'email8',
-  brand: 'brand2',
-  gateway: 'gateway8',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+subscription_user_data = SubscriptionUserData.new
 ```
 

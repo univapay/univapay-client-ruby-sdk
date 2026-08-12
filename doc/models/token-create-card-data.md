@@ -35,15 +35,7 @@ Token Create Card Data schema.
 token_create_card_data = TokenCreateCardData.new(
   card_number: '4242424242424242',
   exp_month: '12',
-  exp_year: '2026',
-  cardholder: 'cardholder6',
-  cvv: 'cvv8',
-  line1: 'line12',
-  line2: 'line24',
-  state: 'state4',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  exp_year: '2026'
 )
 ```
 

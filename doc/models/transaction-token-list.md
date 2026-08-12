@@ -37,7 +37,11 @@ transaction_token_list = TransactionTokenList.new(
       updated_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z'),
       user_data: TransactionTokenListItemUserData.new(
         cardholder_name: 'TARO YAMADA',
-        email: 'taro@example.com'
+        email: 'taro@example.com',
+        brand: 'brand0',
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
       ),
       additional_properties: {
         'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
@@ -57,7 +61,11 @@ transaction_token_list = TransactionTokenList.new(
       updated_on: DateTimeHelper.from_rfc3339('2026-04-10T10:20:11Z'),
       user_data: TransactionTokenListItemUserData.new(
         cardholder_name: 'HANAKO SUZUKI',
-        email: 'hanako@example.com'
+        email: 'hanako@example.com',
+        brand: 'brand0',
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
       ),
       additional_properties: {
         'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')

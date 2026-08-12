@@ -20,12 +20,6 @@ Charge Create Request Three Ds schema.
 ## Example
 
 ```ruby
-charge_create_request_three_ds = ChargeCreateRequestThreeDs.new(
-  redirect_endpoint: 'redirect_endpoint6',
-  mode: ChargeCreateRequestThreeDsMode::NORMAL,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+charge_create_request_three_ds = ChargeCreateRequestThreeDs.new
 ```
 

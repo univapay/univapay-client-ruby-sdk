@@ -21,13 +21,6 @@ Fields that can be updated on the next scheduled payment.
 ## Example
 
 ```ruby
-subscription_update_next_payment = SubscriptionUpdateNextPayment.new(
-  due_date: Date.iso8601('2016-03-13'),
-  amount: 32,
-  terminate_with_status: SubscriptionTerminateWithStatus::SUSPENDED,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+subscription_update_next_payment = SubscriptionUpdateNextPayment.new
 ```
 

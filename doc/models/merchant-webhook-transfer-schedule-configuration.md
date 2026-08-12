@@ -30,13 +30,8 @@ merchant_webhook_transfer_schedule_configuration = MerchantWebhookTransferSchedu
   wait_period: 'P7D',
   period: 'weekly',
   full_period_required: false,
-  day_of_week: 'day_of_week6',
-  week_of_month: 124,
   weekly_closing_day: 'sunday',
-  weekly_payout_day: 'friday',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  weekly_payout_day: 'friday'
 )
 ```
 

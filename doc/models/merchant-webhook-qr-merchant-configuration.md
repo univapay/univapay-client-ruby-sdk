@@ -20,10 +20,7 @@ QR merchant payment settings.
 
 ```ruby
 merchant_webhook_qr_merchant_configuration = MerchantWebhookQrMerchantConfiguration.new(
-  enabled: false,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  enabled: false
 )
 ```
 

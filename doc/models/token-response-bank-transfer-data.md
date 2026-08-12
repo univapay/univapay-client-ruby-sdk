@@ -36,10 +36,7 @@ token_response_bank_transfer_data = TokenResponseBankTransferData.new(
   branch_code: '123',
   branch_name: 'Test Branch',
   account_number: '1234567',
-  account_holder_name: 'TARO YAMADA',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  account_holder_name: 'TARO YAMADA'
 )
 ```
 

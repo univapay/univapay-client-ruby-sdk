@@ -37,14 +37,8 @@ cancel_webhook_callback = CancelWebhookCallback.new(
     ),
     mode: ChargeMode::LIVE,
     created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
-    updated_on: DateTimeHelper.from_rfc3339('2026-04-09T07:36:00.000000Z'),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    updated_on: DateTimeHelper.from_rfc3339('2026-04-09T07:36:00.000000Z')
+  )
 )
 ```
 

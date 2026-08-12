@@ -19,11 +19,6 @@ Schedule-related settings.
 ## Example
 
 ```ruby
-suspend_schedule_settings = SuspendScheduleSettings.new(
-  termination_mode: SubscriptionTerminationMode::IMMEDIATE,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
-)
+suspend_schedule_settings = SuspendScheduleSettings.new
 ```
 

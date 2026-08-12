@@ -25,10 +25,7 @@ The HTTP status will return success (2xx), but the resource `status` will be `fa
 payment_error = PaymentError.new(
   code: 301,
   message: 'Card number error.',
-  detail: 'The provided card number failed validation.',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  detail: 'The provided card number failed validation.'
 )
 ```
 

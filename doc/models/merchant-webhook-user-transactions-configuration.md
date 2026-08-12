@@ -40,14 +40,9 @@ merchant_webhook_user_transactions_configuration = MerchantWebhookUserTransactio
   enabled: true,
   notify_customer: true,
   notify_on_test: false,
-  notify_on_recurring_token_creation: false,
-  notify_on_recurring_token_cvv_failed: false,
   notify_on_webhook_failure: true,
   notify_on_webhook_disabled: true,
-  notify_on_subscriptions: true,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  notify_on_subscriptions: true
 )
 ```
 

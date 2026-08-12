@@ -28,10 +28,6 @@ store = Store.new(
   created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
   configuration: MerchantWebhookConfiguration.new(
     percent_fee: 3.6,
-    flat_fees: [
-      nil
-    ],
-    logo_url: 'logo_url4',
     country: 'JP',
     language: 'ja',
     minimum_charge_amounts: [
@@ -64,14 +60,8 @@ store = Store.new(
       enabled: true,
       match_amount: true,
       expiration: 'P7D'
-    ),
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+    )
+  )
 )
 ```
 

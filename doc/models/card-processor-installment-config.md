@@ -22,10 +22,7 @@ Card-processor capabilities available for installment payments.
 ```ruby
 card_processor_installment_config = CardProcessorInstallmentConfig.new(
   revolving: true,
-  fixed_cycle: true,
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  fixed_cycle: true
 )
 ```
 

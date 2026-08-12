@@ -26,10 +26,7 @@ webhook_create_request = WebhookCreateRequest.new(
     WebhookTrigger::CHARGE_FINISHED
   ],
   url: 'https://example.com/webhooks/payments',
-  auth_token: 'my-secret-token',
-  additional_properties: {
-    'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-  }
+  auth_token: 'my-secret-token'
 )
 ```
 
