@@ -1,6 +1,8 @@
 
 # Transaction Token Create Request
 
+Request payload for creating a transaction token, which represents a payment method to charge against.
+
 *This model accepts additional fields of type Object.*
 
 ## Structure

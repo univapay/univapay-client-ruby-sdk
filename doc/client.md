@@ -6,6 +6,7 @@ The following parameters are configurable for the API Client:
 | Parameter | Type | Description |
 |  --- | --- | --- |
 | base_url | `String` | Base URL for the API<br>*Default*: `'https://api.univapay.com'` |
+| direct_debit_base_url | `String` | Base URL for the Direct Debit API<br>*Default*: `'https://direct-debit.gopay-services.com'` |
 | environment | [`Environment`](../README.md#environments) | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | connection | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
 | adapter | `Faraday::Adapter` | The Faraday adapter object passed by the SDK user for performing http requests |
@@ -34,6 +35,7 @@ client = Client.new(
   ),
   environment: Environment::PRODUCTION,
   base_url: 'https://api.univapay.com',
+  direct_debit_base_url: 'https://direct-debit.gopay-services.com',
   logging_configuration: LoggingConfiguration.new(
     log_level: Logger::INFO,
     request_logging_config: RequestLoggingConfiguration.new(
@@ -74,4 +76,5 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | merchants | Gets MerchantsApi |
 | stores | Gets StoresApi |
 | webhooks | Gets WebhooksApi |
+| direct_debit | Gets DirectDebitApi |
 

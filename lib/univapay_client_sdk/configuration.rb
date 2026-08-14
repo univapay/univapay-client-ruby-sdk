@@ -22,14 +22,23 @@ module UnivapayClientSdk
   # An enum for API servers.
   class Server
     SERVER = [
-      DEFAULT = 'default'.freeze
+      DEFAULT = 'default'.freeze,
+      DIRECTDEBIT = 'directDebit'.freeze
     ].freeze
 
     # Converts a string or symbol into a valid Server constant.
     def self.from_value(value, default_value = DEFAULT)
       return default_value if value.nil?
 
-      default_value
+      str = value.to_s.strip.downcase
+      case str
+      when 'default' then DEFAULT
+      when 'directdebit' then DIRECTDEBIT
+
+      else
+        warn "[Server] Unknown server '#{value}', falling back to #{default_value} "
+        default_value
+      end
     end
   end
 
@@ -37,7 +46,8 @@ module UnivapayClientSdk
   # are configured in this class.
   class Configuration < CoreLibrary::HttpClientConfiguration
     # The attribute readers for properties.
-    attr_reader :environment, :base_url, :bearer_auth_credentials
+    attr_reader :environment, :base_url, :direct_debit_base_url,
+                :bearer_auth_credentials
 
     class << self
       attr_reader :environments
@@ -50,7 +60,9 @@ module UnivapayClientSdk
       retry_methods: %i[get put get put], http_callback: nil,
       proxy_settings: nil, logging_configuration: nil,
       environment: Environment::PRODUCTION,
-      base_url: 'https://api.univapay.com', bearer_auth_credentials: nil
+      base_url: 'https://api.univapay.com',
+      direct_debit_base_url: 'https://direct-debit.gopay-services.com',
+      bearer_auth_credentials: nil
     )
       super connection: connection, adapter: adapter, timeout: timeout,
             max_retries: max_retries, retry_interval: retry_interval,
@@ -64,6 +76,9 @@ module UnivapayClientSdk
 
       # Base URL for the API
       @base_url = base_url
+
+      # Base URL for the Direct Debit API
+      @direct_debit_base_url = direct_debit_base_url
 
       # The object holding OAuth 2 Bearer token credentials
       @bearer_auth_credentials = bearer_auth_credentials
@@ -79,7 +94,7 @@ module UnivapayClientSdk
                    max_retries: nil, retry_interval: nil, backoff_factor: nil,
                    retry_statuses: nil, retry_methods: nil, http_callback: nil,
                    proxy_settings: nil, logging_configuration: nil,
-                   environment: nil, base_url: nil,
+                   environment: nil, base_url: nil, direct_debit_base_url: nil,
                    bearer_auth_credentials: nil)
       connection ||= self.connection
       adapter ||= self.adapter
@@ -94,6 +109,7 @@ module UnivapayClientSdk
       logging_configuration ||= self.logging_configuration
       environment ||= self.environment
       base_url ||= self.base_url
+      direct_debit_base_url ||= self.direct_debit_base_url
       bearer_auth_credentials ||= self.bearer_auth_credentials
 
       Configuration.new(connection: connection, adapter: adapter,
@@ -106,6 +122,7 @@ module UnivapayClientSdk
                         proxy_settings: proxy_settings,
                         logging_configuration: logging_configuration,
                         environment: environment, base_url: base_url,
+                        direct_debit_base_url: direct_debit_base_url,
                         bearer_auth_credentials: bearer_auth_credentials)
     end
 
@@ -113,7 +130,8 @@ module UnivapayClientSdk
     # All the environments the SDK can run in.
     ENVIRONMENTS = {
       Environment::PRODUCTION => {
-        Server::DEFAULT => '{baseUrl}'
+        Server::DEFAULT => '{baseUrl}',
+        Server::DIRECTDEBIT => '{directDebitBaseUrl}'
       }
     }.freeze
 
@@ -123,7 +141,8 @@ module UnivapayClientSdk
     # @return [String] The base URI.
     def get_base_uri(server = Server::DEFAULT)
       parameters = {
-        'baseUrl' => { 'value' => base_url, 'encode' => false }
+        'baseUrl' => { 'value' => base_url, 'encode' => false },
+        'directDebitBaseUrl' => { 'value' => direct_debit_base_url, 'encode' => false }
       }
       APIHelper.append_url_with_template_parameters(
         ENVIRONMENTS[environment][server], parameters
@@ -135,6 +154,8 @@ module UnivapayClientSdk
       # === Core environment ===
       environment = Environment.from_value(ENV.fetch('ENVIRONMENT', 'production'))
       base_url = ENV.fetch('BASE_URL', 'https://api.univapay.com')
+      direct_debit_base_url = ENV.fetch('DIRECT_DEBIT_BASE_URL',
+                                        'https://direct-debit.gopay-services.com')
       timeout = (ENV['TIMEOUT'] || 30).to_f
       max_retries = (ENV['MAX_RETRIES'] || 0).to_i
       retry_interval = (ENV['RETRY_INTERVAL'] || 1).to_f
@@ -164,6 +185,7 @@ module UnivapayClientSdk
       Configuration.new(
         environment: environment,
         base_url: base_url,
+        direct_debit_base_url: direct_debit_base_url,
         timeout: timeout,
         max_retries: max_retries,
         retry_interval: retry_interval,

@@ -67,6 +67,12 @@ module UnivapayClientSdk
       @webhooks ||= WebhooksApi.new @global_configuration
     end
 
+    # Access to direct_debit controller.
+    # @return [DirectDebitApi] Returns the controller instance.
+    def direct_debit
+      @direct_debit ||= DirectDebitApi.new @global_configuration
+    end
+
     def initialize(
       connection: nil, adapter: :net_http_persistent, timeout: 30,
       max_retries: 0, retry_interval: 1, backoff_factor: 2,
@@ -74,28 +80,30 @@ module UnivapayClientSdk
       retry_methods: %i[get put get put], http_callback: nil,
       proxy_settings: nil, logging_configuration: nil,
       environment: Environment::PRODUCTION,
-      base_url: 'https://api.univapay.com', bearer_auth_credentials: nil,
-      config: nil
+      base_url: 'https://api.univapay.com',
+      direct_debit_base_url: 'https://direct-debit.gopay-services.com',
+      bearer_auth_credentials: nil, config: nil
     )
-      wrapped_callback = IdempotencyCallback.new(http_callback)
       @config = if config.nil?
                   Configuration.new(
                     connection: connection, adapter: adapter, timeout: timeout,
                     max_retries: max_retries, retry_interval: retry_interval,
                     backoff_factor: backoff_factor,
                     retry_statuses: retry_statuses,
-                    retry_methods: retry_methods, http_callback: wrapped_callback,
+                    retry_methods: retry_methods,
+                    http_callback: IdempotencyCallback.new(http_callback),
                     proxy_settings: proxy_settings,
                     logging_configuration: logging_configuration,
                     environment: environment, base_url: base_url,
+                    direct_debit_base_url: direct_debit_base_url,
                     bearer_auth_credentials: bearer_auth_credentials
                   )
-                else
-                if config.http_callback.is_a?(IdempotencyCallback)
+                elsif config.http_callback.is_a?(IdempotencyCallback)
                   config
                 else
-                  config.clone_with(http_callback: IdempotencyCallback.new(config.http_callback))
-                end
+                  config.clone_with(
+                    http_callback: IdempotencyCallback.new(config.http_callback)
+                  )
                 end
       user_agent_params = BaseApi.user_agent_parameters
 
@@ -126,3 +134,11 @@ module UnivapayClientSdk
     end
   end
 end
+
+# Hand-authored extensions (IdempotencyCallback and the poll_* helpers) live in a
+# file APIMatic never generates. Required from here rather than from the end of
+# lib/univapay_client_sdk.rb, because that is exactly where APIMatic appends the
+# require for each new controller — the two collided on every regeneration that
+# added an endpoint group. extensions.rb requires the classes it reopens, so it
+# does not care that this runs before the entry point loads the controllers.
+require_relative 'extensions'

@@ -205,6 +205,23 @@ require_relative 'univapay_client_sdk/models/' \
                  'customs_declaration_webhook_callback_extension'
 require_relative 'univapay_client_sdk/models/' \
                  'customs_declaration_webhook_callback'
+require_relative 'univapay_client_sdk/models/' \
+                 'direct_debit_merchant_configuration'
+require_relative 'univapay_client_sdk/models/' \
+                 'direct_debit_notification_configuration'
+require_relative 'univapay_client_sdk/models/direct_debit_schedule'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_account'
+require_relative 'univapay_client_sdk/models/' \
+                 'direct_debit_bank_account_create_request'
+require_relative 'univapay_client_sdk/models/' \
+                 'direct_debit_bank_account_update_request'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_account_list'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_transfer'
+require_relative 'univapay_client_sdk/models/' \
+                 'direct_debit_bank_transfer_create_request'
+require_relative 'univapay_client_sdk/models/' \
+                 'direct_debit_bank_transfer_patch_request'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_transfer_list'
 require_relative 'univapay_client_sdk/models/card_processor_installment_config'
 require_relative 'univapay_client_sdk/models/' \
                  'restrict_ip_after_failed_charge_config'
@@ -252,6 +269,13 @@ require_relative 'univapay_client_sdk/models/cancel_status'
 require_relative 'univapay_client_sdk/models/webhook_trigger'
 require_relative 'univapay_client_sdk/models/bank_transfer_payment_status'
 require_relative 'univapay_client_sdk/models/customs_declaration_webhook_status'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_account_type'
+require_relative 'univapay_client_sdk/models/direct_debit_registration_origin'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_account_status'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_transfer_lock'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_transfer_status'
+require_relative 'univapay_client_sdk/models/direct_debit_bank_transfer_error'
+require_relative 'univapay_client_sdk/models/direct_debit_debit_date'
 require_relative 'univapay_client_sdk/models/bank_transfer_event'
 require_relative 'univapay_client_sdk/models/cancel_event'
 require_relative 'univapay_client_sdk/models/charge_event'
@@ -279,7 +303,4 @@ require_relative 'univapay_client_sdk/apis/cancels_api'
 require_relative 'univapay_client_sdk/apis/merchants_api'
 require_relative 'univapay_client_sdk/apis/stores_api'
 require_relative 'univapay_client_sdk/apis/webhooks_api'
-
-# Hand-authored extensions kept outside generated files (avoids regen
-# conflicts). Required last so it reopens the already-loaded API classes.
-require_relative 'univapay_client_sdk/extensions'
+require_relative 'univapay_client_sdk/apis/direct_debit_api'

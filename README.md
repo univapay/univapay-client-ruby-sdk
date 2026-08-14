@@ -36,16 +36,16 @@ We will assume that all requests are going to originate from a backend server th
 Install the gem from the command line:
 
 ```bash
-gem install univapay-client-sdk -v 1.0.1
+gem install univapay-client-sdk -v 1.0.2
 ```
 
 Or add the gem to your Gemfile and run `bundle`:
 
 ```ruby
-gem 'univapay-client-sdk', '1.0.1'
+gem 'univapay-client-sdk', '1.0.2'
 ```
 
-For additional gem details, see the [RubyGems page for the univapay-client-sdk gem](https://rubygems.org/gems/univapay-client-sdk/versions/1.0.1).
+For additional gem details, see the [RubyGems page for the univapay-client-sdk gem](https://rubygems.org/gems/univapay-client-sdk/versions/1.0.2).
 
 ## IRB Console Usage
 
@@ -99,6 +99,7 @@ The following parameters are configurable for the API Client:
 | Parameter | Type | Description |
 |  --- | --- | --- |
 | base_url | `String` | Base URL for the API<br>*Default*: `'https://api.univapay.com'` |
+| direct_debit_base_url | `String` | Base URL for the Direct Debit API<br>*Default*: `'https://direct-debit.gopay-services.com'` |
 | environment | [`Environment`](README.md#environments) | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | connection | `Faraday::Connection` | The Faraday connection object passed by the SDK user for making requests |
 | adapter | `Faraday::Adapter` | The Faraday adapter object passed by the SDK user for performing http requests |
@@ -127,6 +128,7 @@ client = Client.new(
   ),
   environment: Environment::PRODUCTION,
   base_url: 'https://api.univapay.com',
+  direct_debit_base_url: 'https://direct-debit.gopay-services.com',
   logging_configuration: LoggingConfiguration.new(
     log_level: Logger::INFO,
     request_logging_config: RequestLoggingConfiguration.new(
@@ -170,6 +172,7 @@ This API uses the following authentication schemes.
 ## List of APIs
 
 * [Transaction Tokens](doc/controllers/transaction-tokens.md)
+* [Direct Debit](doc/controllers/direct-debit.md)
 * [Charges](doc/controllers/charges.md)
 * [Refunds](doc/controllers/refunds.md)
 * [Subscriptions](doc/controllers/subscriptions.md)

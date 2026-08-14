@@ -45,6 +45,7 @@ Values provided through arguments take precedence over those defined in environm
 
 ```ruby
 BASE_URL='https://api.univapay.com'
+DIRECT_DEBIT_BASE_URL='https://direct-debit.gopay-services.com'
 ENVIRONMENT='production'
 
 ACCESS_TOKEN='accessToken'

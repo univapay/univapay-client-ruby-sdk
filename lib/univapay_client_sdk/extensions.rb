@@ -5,10 +5,30 @@
 # spec changes nearby. Keeping the extensions here -- in a file APIMatic never
 # generates -- means regeneration can never conflict with them.
 #
-# This file is required last (after the API classes and models are loaded), so
-# the reopened classes below augment the already-defined generated classes.
+# This file used to depend on being required LAST, from the end of
+# lib/univapay_client_sdk.rb, so that the classes it reopens were already
+# defined. That position is exactly where APIMatic appends the require for each
+# new controller, so the two always collided — a conflict on every regeneration
+# that adds an endpoint group.
+#
+# Instead this file now pulls in the classes it reopens, and each reopened class
+# below restates its `< BaseApi` superclass. Both make it load-order
+# independent, so the require can live somewhere APIMatic never edits (the
+# bottom of client.rb) and the generated entry point stays pristine.
 
 require_relative 'http/http_call_back'
+# base_api resolves APIException at class-definition time, so the exception has to
+# be loaded first — the generated entry point does that further down its own list,
+# which is after this file now runs.
+require_relative 'exceptions/api_exception'
+require_relative 'apis/base_api'
+# charge_status is referenced at class-definition time by CHARGE_TRANSITIONS
+# below, so it cannot rely on the generated entry point's own require order.
+require_relative 'models/charge_status'
+require_relative 'apis/charges_api'
+require_relative 'apis/cancels_api'
+require_relative 'apis/refunds_api'
+require_relative 'apis/subscriptions_api'
 
 module UnivapayClientSdk
   # Injects an Idempotency-Key header into mutating requests if absent.
@@ -51,29 +71,59 @@ module UnivapayClientSdk
   end
 
   # poll_* helpers, reopened onto the generated controller classes.
-  class ChargesApi
-    def poll_charge(store_id, id, max_attempts: 10)
-      terminal_statuses = [
+  class ChargesApi < BaseApi
+    # Valid transitions out of each non-final charge status; polling stops only
+    # when the charge reaches a status reachable from where it started — e.g.
+    # polling an `awaiting` charge (3DS) waits for `authorized`, it does not
+    # stop on `awaiting`. A charge already in a final status returns immediately;
+    # on attempt exhaustion the latest response is returned (a poll timeout, not
+    # a failure — fall back to the webhook).
+    CHARGE_TRANSITIONS = {
+      ChargeStatus::PENDING => [
+        ChargeStatus::AWAITING,
+        ChargeStatus::AUTHORIZED,
         ChargeStatus::SUCCESSFUL,
         ChargeStatus::FAILED,
         ChargeStatus::ERROR,
-        ChargeStatus::CANCELED,
+        ChargeStatus::CANCELED
+      ],
+      ChargeStatus::AWAITING => [
         ChargeStatus::AUTHORIZED,
-        ChargeStatus::AWAITING
+        ChargeStatus::SUCCESSFUL,
+        ChargeStatus::FAILED,
+        ChargeStatus::ERROR,
+        ChargeStatus::CANCELED
+      ],
+      ChargeStatus::AUTHORIZED => [
+        ChargeStatus::SUCCESSFUL,
+        ChargeStatus::FAILED,
+        ChargeStatus::ERROR,
+        ChargeStatus::CANCELED
       ]
+    }.freeze
+
+    def poll_charge(store_id, id, max_attempts: 10)
+      # Instant read (no hold) to key the transition map off the charge's current
+      # status; a held first read could observe a transition and re-key the map
+      # one state too far.
+      response = get_charge(store_id, id)
+      status = response && response.data ? response.data.status : nil
+      return response if !status.nil? && !CHARGE_TRANSITIONS.key?(status)
+
+      targets = CHARGE_TRANSITIONS[status.nil? ? ChargeStatus::PENDING : status]
       attempts = 0
       while attempts < max_attempts
         response = get_charge(store_id, id, polling: true)
-        if response && response.data && terminal_statuses.include?(response.data.status)
+        if response && response.data && targets.include?(response.data.status)
           return response
         end
         attempts += 1
       end
-      get_charge(store_id, id, polling: true)
+      response
     end
   end
 
-  class CancelsApi
+  class CancelsApi < BaseApi
     def poll_cancel(store_id, charge_id, id, max_attempts: 10)
       terminal_statuses = [
         CancelStatus::SUCCESSFUL,
@@ -92,7 +142,7 @@ module UnivapayClientSdk
     end
   end
 
-  class RefundsApi
+  class RefundsApi < BaseApi
     def poll_refund(store_id, charge_id, id, max_attempts: 10)
       terminal_statuses = [
         RefundStatus::SUCCESSFUL,
@@ -111,7 +161,7 @@ module UnivapayClientSdk
     end
   end
 
-  class SubscriptionsApi
+  class SubscriptionsApi < BaseApi
     def poll_subscription(store_id, id, max_attempts: 10)
       attempts = 0
       while attempts < max_attempts
