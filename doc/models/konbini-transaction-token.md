@@ -1,13 +1,13 @@
 
-# Transaction Token
+# Konbini Transaction Token
 
-Stored transaction token resource.
+Stored transaction token resource for a `konbini` payment type.
 
 *This model accepts additional fields of type Object.*
 
 ## Structure
 
-`TransactionToken`
+`KonbiniTransactionToken`
 
 ## Fields
 
@@ -16,7 +16,6 @@ Stored transaction token resource.
 | `id` | `UUID \| String` | Optional | Unique identifier. |
 | `store_id` | `UUID \| String` | Optional | Store identifier. |
 | `email` | `String` | Optional | Customer email address. |
-| `payment_type` | [`TransactionTokenPaymentType`](../../doc/models/transaction-token-payment-type.md) | Optional | Transaction Token Payment Type schema. |
 | `active` | `TrueClass \| FalseClass` | Optional | Whether the resource is active. |
 | `mode` | [`TransactionTokenMode`](../../doc/models/transaction-token-mode.md) | Optional | Transaction Token Mode schema. |
 | `type` | [`TransactionTokenType`](../../doc/models/transaction-token-type.md) | Optional | Transaction Token Type schema. |
@@ -26,17 +25,34 @@ Stored transaction token resource.
 | `created_on` | `DateTime` | Optional | Timestamp when the resource was created. |
 | `updated_on` | `DateTime` | Optional | Timestamp when the resource was last updated. |
 | `last_used_on` | `DateTime` | Optional | Timestamp when the token was last used. |
-| `data` | [TokenResponseCardData](../../doc/models/token-response-card-data.md) \| [TokenResponseKonbiniData](../../doc/models/token-response-konbini-data.md) \| [TokenResponseOnlineData](../../doc/models/token-response-online-data.md) \| [TokenResponseBankTransferData](../../doc/models/token-response-bank-transfer-data.md) \| nil | Optional | Transaction token data payload. The actual structure depends on `payment_type` — card, konbini, online (QR / 3DS), or bank transfer. |
+| `payment_type` | `String` | Required, Constant | Payment method type. Always `konbini` for this variant.<br><br>**Value**: `'konbini'` |
+| `data` | [`TokenResponseKonbiniData`](../../doc/models/token-response-konbini-data.md) | Required | Token Response Konbini Data schema. |
 | `additional_properties` | `Hash[String, Object]` | Optional | - |
 
 ## Example
 
 ```ruby
-transaction_token = TransactionToken.new(
+konbini_transaction_token = KonbiniTransactionToken.new(
+  payment_type: 'konbini',
+  data: TokenResponseKonbiniData.new(
+    customer_name: 'Taro Yamada',
+    convenience_store: BaseKonbiniDataConvenienceStore::SEVEN_ELEVEN,
+    expiration_period: 'P7D',
+    expiration_time_shift: nil,
+    phone_number: TokenResponsePhoneNumber.new(
+      country_code: 81,
+      local_number: '08012341234',
+      additional_properties: {
+        'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+      }
+    ),
+    additional_properties: {
+      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+    }
+  ),
   id: '6426bbd2-17bd-41bf-883b-1fe970db48ee',
   store_id: 'fc264608-9a9e-495e-844e-a08129a81af4',
   email: 'test@univapay.com',
-  payment_type: TransactionTokenPaymentType::CARD,
   active: true,
   mode: TransactionTokenMode::LIVE,
   type: TransactionTokenType::ONE_TIME,
@@ -48,26 +64,6 @@ transaction_token = TransactionToken.new(
   created_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z'),
   updated_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z'),
   last_used_on: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50.000000Z'),
-  data: TokenResponseCardData.new(
-    card: TokenResponseCardDataCard.new(
-      cardholder: 'TARO YAMADA',
-      exp_month: 12,
-      exp_year: 2026,
-      card_bin: 'card_bin0',
-      last_four: '4242',
-      brand: 'visa',
-      additional_properties: {
-        'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-      }
-    ),
-    billing: nil,
-    cvv_authorize: nil,
-    cvv_authorize_check: nil,
-    three_ds: nil,
-    additional_properties: {
-      'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
-    }
-  ),
   additional_properties: {
     'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
   }

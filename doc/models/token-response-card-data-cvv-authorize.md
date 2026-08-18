@@ -25,7 +25,7 @@ Token Response Card Data Cvv Authorize schema.
 ```ruby
 token_response_card_data_cvv_authorize = TokenResponseCardDataCvvAuthorize.new(
   enabled: true,
-  status: 'successful',
+  status: 'current',
   charge_id: nil,
   credentials_id: nil,
   currency: 'JPY'

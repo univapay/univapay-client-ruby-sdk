@@ -77,7 +77,48 @@ class StoresApiTest < ApiTestBase
       'ustomer":true,"notify_on_webhook_failure":true},"card_configuration":{"'\
       'enabled":true,"debit_enabled":true,"prepaid_enabled":false,"three_ds_re'\
       'quired":true},"online_configuration":{"enabled":true},"bank_transfer_co'\
-      'nfiguration":{"enabled":true,"match_amount":true,"expiration":"P7D"}}}'
+      'nfiguration":{"enabled":true,"match_amount":true,"expiration":"P7D"},"q'\
+      'r_scan_configuration":{"enabled":true,"forbidden_qr_scan_gateways":["we'\
+      'chat"]},"convenience_configuration":{"enabled":true,"expiration":"P3D"}'\
+      ',"paidy_configuration":{"enabled":false},"recurring_token_configuration'\
+      '":{"recurring_type":"infinite","charge_wait_period":"P7D","card_charge_'\
+      'cvv_confirmation":{"enabled":false}},"security_configuration":{"card_ch'\
+      'arge_cooldown":"PT5M","subscription_cooldown":"PT10M","restrict_ip_afte'\
+      'r_failed_charge":{"enabled":true,"count":5,"cooldown":"PT1H"},"refund_p'\
+      'ercent_limit":100,"confirmation_required":false,"min_refund_threshold":'\
+      '100,"limit_refund_by_sales":{"enabled":true,"period":"monthly","rolling'\
+      '_window":true}},"installments_configuration":{"enabled":true,"card_proc'\
+      'essor":{"revolving":true,"fixed_cycle":true},"supported_payment_types":'\
+      '["card"],"min_charge_amount":{"amount":3000,"currency":"JPY"},"max_payo'\
+      'ut_period":"P12M","only_with_processor":true},"card_brand_percent_fees"'\
+      ':{"visa":3.6,"mastercard":3.6,"jcb":3.8}}}'
+    )
+    received_body = JSON.parse(@response_catcher.response.raw_body)
+    assert(ComparisonHelper.match_body(expected_body, received_body))
+  end
+
+  # Derives a deterministic, store-scoped UUID from a local customer identifier supplied by the merchant. Calling this endpoint again with the same `customer_id` for the same store always returns the same UUID — the operation has no side effects (nothing is persisted), so it is safe to call repeatedly and does not require an `Idempotency-Key`. App Token Secret is required.
+  def test_create_customer_id
+    # Parameters for the API call
+    store_id = '0cab399b-5621-425b-993b-f8507eba1e78'
+    body = CreateCustomerIdRequest.from_hash(APIHelper.json_deserialize(
+      '{"customer_id":"local-customer-1902"}', false))
+
+    # Perform the API call through the SDK function
+    result = @controller.create_customer_id(store_id, body)
+
+    # Test response code
+    assert_equal(200, @response_catcher.response.status_code)
+    # Test headers
+    expected_headers = {}
+    expected_headers['content-type'] = 'application/json; charset=utf-8'
+
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
+
+    # Test whether the captured response is as we expected
+    refute_nil(result)
+    expected_body = JSON.parse(
+      '{"customer_id":"8a3f1b8e-2c1a-4b7a-9c2e-6f6b6f6e2b10"}'
     )
     received_body = JSON.parse(@response_catcher.response.raw_body)
     assert(ComparisonHelper.match_body(expected_body, received_body))

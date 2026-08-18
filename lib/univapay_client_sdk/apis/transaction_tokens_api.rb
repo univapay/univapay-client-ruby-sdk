@@ -28,8 +28,12 @@ module UnivapayClientSdk
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('JWT_TOKEN')))
         .response(new_response_handler
-                    .deserializer(APIHelper.method(:custom_type_deserializer))
-                    .deserialize_into(TransactionToken.method(:from_hash))
+                    .deserializer(proc do |response, should_symbolize|
+                      APIHelper.deserialize_union_type(
+                        UnionTypeLookUp.get(:TransactionToken),
+                        response, should_symbolize, true
+                      )
+                    end)
                     .is_api_response(true)
                     .local_error_template('400',
                                           'HTTP 400 Bad Request: {$response.body#/code}',
@@ -65,6 +69,16 @@ module UnivapayClientSdk
     end
 
     # Lists all transaction tokens across all stores.
+    # @param [String] search Optional parameter: Case-insensitive free-text
+    # search.
+    # @param [UUID | String] customer_id Optional parameter: Filter by customer
+    # ID.
+    # @param [TransactionTokenListType] type Optional parameter: Filter by token
+    # type. `one_time` tokens are excluded from listings and cannot be filtered
+    # on; filtering to `recurring` requires the App Token Secret.
+    # @param [ModeQuery] mode Optional parameter: Filter by environment mode.
+    # @param [TransactionTokenActiveFilter] active Optional parameter: Filter
+    # recurring tokens by whether they are still active.
     # @param [Integer] limit Optional parameter: Maximum number of resources to
     # return in one page.
     # @param [UUID | String] cursor Optional parameter: Cursor pointing to the
@@ -72,13 +86,23 @@ module UnivapayClientSdk
     # @param [CursorDirectionQuery] cursor_direction Optional parameter:
     # Pagination direction relative to the supplied cursor.
     # @return [ApiResponse] Complete http response with raw body and status code.
-    def list_all_transaction_tokens(limit: 10,
+    def list_all_transaction_tokens(search: nil,
+                                    customer_id: nil,
+                                    type: nil,
+                                    mode: nil,
+                                    active: TransactionTokenActiveFilter::ACTIVE,
+                                    limit: 10,
                                     cursor: nil,
                                     cursor_direction: CursorDirectionQuery::DESC)
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/tokens',
                                      Server::DEFAULT)
+                   .query_param(new_parameter(search, key: 'search'))
+                   .query_param(new_parameter(customer_id, key: 'customer_id'))
+                   .query_param(new_parameter(type, key: 'type'))
+                   .query_param(new_parameter(mode, key: 'mode'))
+                   .query_param(new_parameter(active, key: 'active'))
                    .query_param(new_parameter(limit, key: 'limit'))
                    .query_param(new_parameter(cursor, key: 'cursor'))
                    .query_param(new_parameter(cursor_direction, key: 'cursor_direction'))
@@ -124,6 +148,16 @@ module UnivapayClientSdk
     # Lists all transaction tokens for a specific store.
     # @param [UUID | String] store_id Required parameter: The unique identifier
     # of the store.
+    # @param [String] search Optional parameter: Case-insensitive free-text
+    # search.
+    # @param [UUID | String] customer_id Optional parameter: Filter by customer
+    # ID.
+    # @param [TransactionTokenListType] type Optional parameter: Filter by token
+    # type. `one_time` tokens are excluded from listings and cannot be filtered
+    # on; filtering to `recurring` requires the App Token Secret.
+    # @param [ModeQuery] mode Optional parameter: Filter by environment mode.
+    # @param [TransactionTokenActiveFilter] active Optional parameter: Filter
+    # recurring tokens by whether they are still active.
     # @param [Integer] limit Optional parameter: Maximum number of resources to
     # return in one page.
     # @param [UUID | String] cursor Optional parameter: Cursor pointing to the
@@ -132,6 +166,11 @@ module UnivapayClientSdk
     # Pagination direction relative to the supplied cursor.
     # @return [ApiResponse] Complete http response with raw body and status code.
     def list_store_transaction_tokens(store_id,
+                                      search: nil,
+                                      customer_id: nil,
+                                      type: nil,
+                                      mode: nil,
+                                      active: TransactionTokenActiveFilter::ACTIVE,
                                       limit: 10,
                                       cursor: nil,
                                       cursor_direction: CursorDirectionQuery::DESC)
@@ -142,6 +181,11 @@ module UnivapayClientSdk
                    .template_param(new_parameter(store_id, key: 'storeId')
                                     .is_required(true)
                                     .should_encode(true))
+                   .query_param(new_parameter(search, key: 'search'))
+                   .query_param(new_parameter(customer_id, key: 'customer_id'))
+                   .query_param(new_parameter(type, key: 'type'))
+                   .query_param(new_parameter(mode, key: 'mode'))
+                   .query_param(new_parameter(active, key: 'active'))
                    .query_param(new_parameter(limit, key: 'limit'))
                    .query_param(new_parameter(cursor, key: 'cursor'))
                    .query_param(new_parameter(cursor_direction, key: 'cursor_direction'))
@@ -189,9 +233,14 @@ module UnivapayClientSdk
     # of the store.
     # @param [UUID | String] id Required parameter: The unique identifier of the
     # resource.
+    # @param [TrueClass | FalseClass] polling Optional parameter: If set to
+    # true, instructs the API to internally poll the token's 3DS or CVV
+    # authorization sub-status until it transitions to another status, or until
+    # the ~3 second server-side timeout is reached.
     # @return [ApiResponse] Complete http response with raw body and status code.
     def get_transaction_token(store_id,
-                              id)
+                              id,
+                              polling: nil)
       @api_call
         .request(new_request_builder(HttpMethodEnum::GET,
                                      '/stores/{storeId}/tokens/{id}',
@@ -202,11 +251,16 @@ module UnivapayClientSdk
                    .template_param(new_parameter(id, key: 'id')
                                     .is_required(true)
                                     .should_encode(true))
+                   .query_param(new_parameter(polling, key: 'polling'))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .auth(Single.new('JWT_TOKEN')))
         .response(new_response_handler
-                    .deserializer(APIHelper.method(:custom_type_deserializer))
-                    .deserialize_into(TransactionToken.method(:from_hash))
+                    .deserializer(proc do |response, should_symbolize|
+                      APIHelper.deserialize_union_type(
+                        UnionTypeLookUp.get(:TransactionToken),
+                        response, should_symbolize, true
+                      )
+                    end)
                     .is_api_response(true)
                     .local_error_template('400',
                                           'HTTP 400 Bad Request: {$response.body#/code}',
@@ -287,8 +341,12 @@ module UnivapayClientSdk
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('JWT_TOKEN')))
         .response(new_response_handler
-                    .deserializer(APIHelper.method(:custom_type_deserializer))
-                    .deserialize_into(TransactionToken.method(:from_hash))
+                    .deserializer(proc do |response, should_symbolize|
+                      APIHelper.deserialize_union_type(
+                        UnionTypeLookUp.get(:TransactionToken),
+                        response, should_symbolize, true
+                      )
+                    end)
                     .is_api_response(true)
                     .local_error_template('400',
                                           'HTTP 400 Bad Request: {$response.body#/code}',
@@ -348,6 +406,145 @@ module UnivapayClientSdk
                    .auth(Single.new('JWT_TOKEN')))
         .response(new_response_handler
                     .is_response_void(true)
+                    .is_api_response(true)
+                    .local_error_template('400',
+                                          'HTTP 400 Bad Request: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('401',
+                                          'HTTP 401 Unauthorized: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('403',
+                                          'HTTP 403 Forbidden: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('404',
+                                          'HTTP 404 Not Found: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('429',
+                                          'HTTP 429 Rate Limited: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('409',
+                                          'HTTP 409 Conflict: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('500',
+                                          'HTTP 500 Server Error: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('503',
+                                          'HTTP 503 Unavailable: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('504',
+                                          'HTTP 504 Timeout: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('default',
+                                          'HTTP {$statusCode}: {$response.body#/code}',
+                                          APIException))
+        .execute
+    end
+
+    # Enables 3-D Secure on an existing `recurring` transaction token that was
+    # created without it. Only applies to `recurring` tokens; returns an error
+    # if 3DS is already enabled. After calling this endpoint, poll the token
+    # until `data.three_ds.status` becomes `awaiting`, then use the token 3DS
+    # issuer token endpoint to complete authentication.
+    # @param [UUID | String] store_id Required parameter: The unique identifier
+    # of the store.
+    # @param [UUID | String] id Required parameter: The unique identifier of the
+    # resource.
+    # @param [String] idempotency_key Optional parameter: An optional
+    # idempotency key to prevent double charges and duplicate operations. We
+    # recommend a randomly generated UUID (v4).
+    # @param [EnableTokenThreeDsRequest] body Optional parameter: Optional
+    # request payload. Omit entirely, or omit `redirect_endpoint`, if no
+    # redirect is needed.
+    # @return [ApiResponse] Complete http response with raw body and status code.
+    def enable_token_three_ds(store_id,
+                              id,
+                              idempotency_key: nil,
+                              body: nil)
+      @api_call
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/stores/{storeId}/tokens/{id}/three_ds',
+                                     Server::DEFAULT)
+                   .template_param(new_parameter(store_id, key: 'storeId')
+                                    .is_required(true)
+                                    .should_encode(true))
+                   .template_param(new_parameter(id, key: 'id')
+                                    .is_required(true)
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .header_param(new_parameter(idempotency_key, key: 'Idempotency-Key'))
+                   .body_param(new_parameter(body))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('JWT_TOKEN')))
+        .response(new_response_handler
+                    .deserializer(proc do |response, should_symbolize|
+                      APIHelper.deserialize_union_type(
+                        UnionTypeLookUp.get(:TransactionToken),
+                        response, should_symbolize, true
+                      )
+                    end)
+                    .is_api_response(true)
+                    .local_error_template('400',
+                                          'HTTP 400 Bad Request: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('401',
+                                          'HTTP 401 Unauthorized: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('403',
+                                          'HTTP 403 Forbidden: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('404',
+                                          'HTTP 404 Not Found: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('429',
+                                          'HTTP 429 Rate Limited: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('409',
+                                          'HTTP 409 Conflict: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('500',
+                                          'HTTP 500 Server Error: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('503',
+                                          'HTTP 503 Unavailable: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('504',
+                                          'HTTP 504 Timeout: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('default',
+                                          'HTTP {$statusCode}: {$response.body#/code}',
+                                          APIException))
+        .execute
+    end
+
+    # Disables 3-D Secure on an existing `recurring` transaction token. Only
+    # applies to `recurring` tokens.
+    # @param [UUID | String] store_id Required parameter: The unique identifier
+    # of the store.
+    # @param [UUID | String] id Required parameter: The unique identifier of the
+    # resource.
+    # @return [ApiResponse] Complete http response with raw body and status code.
+    def disable_token_three_ds(store_id,
+                               id)
+      @api_call
+        .request(new_request_builder(HttpMethodEnum::DELETE,
+                                     '/stores/{storeId}/tokens/{id}/three_ds',
+                                     Server::DEFAULT)
+                   .template_param(new_parameter(store_id, key: 'storeId')
+                                    .is_required(true)
+                                    .should_encode(true))
+                   .template_param(new_parameter(id, key: 'id')
+                                    .is_required(true)
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .auth(Single.new('JWT_TOKEN')))
+        .response(new_response_handler
+                    .deserializer(proc do |response, should_symbolize|
+                      APIHelper.deserialize_union_type(
+                        UnionTypeLookUp.get(:TransactionToken),
+                        response, should_symbolize, true
+                      )
+                    end)
                     .is_api_response(true)
                     .local_error_template('400',
                                           'HTTP 400 Bad Request: {$response.body#/code}',

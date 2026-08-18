@@ -427,21 +427,25 @@ module UnivapayClientSdk
 
     # Captures a previously authorized charge (where `capture` was set to false
     # during creation).  The capture amount must be less than or equal to the
-    # authorized amount, and the currency must match.
+    # authorized amount, and the currency must match. The request body — and
+    # both of its fields — is optional: if omitted entirely, the full
+    # outstanding authorized amount (in the originally requested currency) is
+    # captured.
     # @param [UUID | String] store_id Required parameter: The unique identifier
     # of the store.
     # @param [UUID | String] id Required parameter: The unique identifier of the
     # resource.
-    # @param [ChargeCaptureRequest] body Required parameter: Request payload for
-    # capturing an authorized charge.
     # @param [String] idempotency_key Optional parameter: An optional
     # idempotency key to prevent double charges and duplicate operations. We
     # recommend a randomly generated UUID (v4).
+    # @param [ChargeCaptureRequest] body Optional parameter: Optional request
+    # payload for capturing an authorized charge. Omit entirely to capture the
+    # full outstanding authorized amount.
     # @return [ApiResponse] Complete http response with raw body and status code.
     def capture_charge(store_id,
                        id,
-                       body,
-                       idempotency_key: nil)
+                       idempotency_key: nil,
+                       body: nil)
       @api_call
         .request(new_request_builder(HttpMethodEnum::POST,
                                      '/stores/{storeId}/charges/{id}/capture',
@@ -453,9 +457,8 @@ module UnivapayClientSdk
                                     .is_required(true)
                                     .should_encode(true))
                    .header_param(new_parameter('application/json', key: 'Content-Type'))
-                   .body_param(new_parameter(body)
-                                .is_required(true))
                    .header_param(new_parameter(idempotency_key, key: 'Idempotency-Key'))
+                   .body_param(new_parameter(body))
                    .header_param(new_parameter('application/json', key: 'accept'))
                    .body_serializer(proc do |param| param.to_json unless param.nil? end)
                    .auth(Single.new('JWT_TOKEN')))

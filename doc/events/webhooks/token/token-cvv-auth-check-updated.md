@@ -36,6 +36,38 @@ This event's request payload is of type [TokenWebhookEvent](../../../../doc/mode
     },
     "created_on": "2026-04-09T07:35:50.000000Z",
     "updated_on": "2026-04-09T07:35:50.000000Z",
+    "data": {
+      "card": {
+        "cardholder": "TARO YAMADA",
+        "exp_month": 12,
+        "exp_year": 2026,
+        "brand": "visa",
+        "last_four": "4242",
+        "card_bin": "card_bin0",
+        "exampleAdditionalProperty": {
+          "key1": "val1",
+          "key2": "val2"
+        }
+      },
+      "cvv_authorize": {
+        "enabled": true,
+        "status": "current",
+        "charge_id": null,
+        "credentials_id": null,
+        "currency": "JPY",
+        "exampleAdditionalProperty": {
+          "key1": "val1",
+          "key2": "val2"
+        }
+      },
+      "billing": null,
+      "cvv_authorize_check": null,
+      "three_ds": null,
+      "exampleAdditionalProperty": {
+        "key1": "val1",
+        "key2": "val2"
+      }
+    },
     "exampleAdditionalProperty": {
       "key1": "val1",
       "key2": "val2"

@@ -3,7 +3,6 @@
 # This file was automatically generated for Univapay
 # by APIMATIC v3.0 ( https://www.apimatic.io ).
 
-require 'date'
 module UnivapayClientSdk
   # Schedule settings that can be updated on a subscription.
   class SubscriptionUpdateScheduleSettings < BaseModel
@@ -14,10 +13,17 @@ module UnivapayClientSdk
     # @return [SubscriptionTerminationMode]
     attr_accessor :termination_mode
 
-    # Subscription start date. Used to change the first actual charge date  for
-    # subscriptions that initially only registered a payment method.
-    # @return [DateTime]
+    # Subscription start date (YYYY-MM-DD). Used to change the first actual
+    # charge date for subscriptions that initially only registered a payment
+    # method. Must be in the future; only available before the subscription has
+    # more than one paid payment.
+    # @return [Date]
     attr_accessor :start_on
+
+    # If true, subsequent charges will always occur on the last day of the
+    # month.
+    # @return [TrueClass | FalseClass]
+    attr_accessor :preserve_end_of_month
 
     # ISO-8601 Duration for retry interval if payment fails  (e.g., P3D for 3
     # days, PT48H for 48 hours).
@@ -29,6 +35,7 @@ module UnivapayClientSdk
       @_hash = {} if @_hash.nil?
       @_hash['termination_mode'] = 'termination_mode'
       @_hash['start_on'] = 'start_on'
+      @_hash['preserve_end_of_month'] = 'preserve_end_of_month'
       @_hash['retry_interval'] = 'retry_interval'
       @_hash
     end
@@ -38,6 +45,7 @@ module UnivapayClientSdk
       %w[
         termination_mode
         start_on
+        preserve_end_of_month
         retry_interval
       ]
     end
@@ -48,13 +56,14 @@ module UnivapayClientSdk
     end
 
     def initialize(termination_mode: SubscriptionTerminationMode::IMMEDIATE,
-                   start_on: SKIP, retry_interval: SKIP,
-                   additional_properties: nil)
+                   start_on: SKIP, preserve_end_of_month: SKIP,
+                   retry_interval: SKIP, additional_properties: nil)
       # Add additional model properties to the instance
       additional_properties = {} if additional_properties.nil?
 
       @termination_mode = termination_mode unless termination_mode == SKIP
       @start_on = start_on unless start_on == SKIP
+      @preserve_end_of_month = preserve_end_of_month unless preserve_end_of_month == SKIP
       @retry_interval = retry_interval unless retry_interval == SKIP
       @additional_properties = additional_properties
     end
@@ -66,11 +75,9 @@ module UnivapayClientSdk
       # Extract variables from the hash.
       termination_mode =
         hash['termination_mode'] ||= SubscriptionTerminationMode::IMMEDIATE
-      start_on = if hash.key?('start_on')
-                   (DateTimeHelper.from_rfc3339(hash['start_on']) if hash['start_on'])
-                 else
-                   SKIP
-                 end
+      start_on = hash.key?('start_on') ? hash['start_on'] : SKIP
+      preserve_end_of_month =
+        hash.key?('preserve_end_of_month') ? hash['preserve_end_of_month'] : SKIP
       retry_interval =
         hash.key?('retry_interval') ? hash['retry_interval'] : SKIP
 
@@ -84,26 +91,25 @@ module UnivapayClientSdk
       # Create object from extracted values.
       SubscriptionUpdateScheduleSettings.new(termination_mode: termination_mode,
                                              start_on: start_on,
+                                             preserve_end_of_month: preserve_end_of_month,
                                              retry_interval: retry_interval,
                                              additional_properties: additional_properties)
-    end
-
-    def to_custom_start_on
-      DateTimeHelper.to_rfc3339(start_on)
     end
 
     # Provides a human-readable string representation of the object.
     def to_s
       class_name = self.class.name.split('::').last
       "<#{class_name} termination_mode: #{@termination_mode}, start_on: #{@start_on},"\
-      " retry_interval: #{@retry_interval}, additional_properties: #{@additional_properties}>"
+      " preserve_end_of_month: #{@preserve_end_of_month}, retry_interval: #{@retry_interval},"\
+      " additional_properties: #{@additional_properties}>"
     end
 
     # Provides a debugging-friendly string with detailed object information.
     def inspect
       class_name = self.class.name.split('::').last
       "<#{class_name} termination_mode: #{@termination_mode.inspect}, start_on:"\
-      " #{@start_on.inspect}, retry_interval: #{@retry_interval.inspect}, additional_properties:"\
+      " #{@start_on.inspect}, preserve_end_of_month: #{@preserve_end_of_month.inspect},"\
+      " retry_interval: #{@retry_interval.inspect}, additional_properties:"\
       " #{@additional_properties}>"
     end
   end

@@ -22,7 +22,7 @@ Token Response Card Data Cvv Authorize Check schema.
 
 ```ruby
 token_response_card_data_cvv_authorize_check = TokenResponseCardDataCvvAuthorizeCheck.new(
-  status: 'successful',
+  status: 'current',
   charge_id: nil,
   date: DateTimeHelper.from_rfc3339('2026-04-09T07:35:50Z')
 )

@@ -4,18 +4,20 @@
 # by APIMATIC v3.0 ( https://www.apimatic.io ).
 
 module UnivapayClientSdk
-  # Request payload for capturing an authorized charge.
+  # Request payload for capturing an authorized charge. Both fields are
+  # optional; omit the entire body to capture the full outstanding amount.
   class ChargeCaptureRequest < BaseModel
     SKIP = Object.new
     private_constant :SKIP
 
     # The amount to capture. Must be less than or equal to the authorized
-    # amount.
+    # amount. If omitted, the full outstanding authorized amount is captured.
     # @return [Integer]
     attr_accessor :amount
 
     # ISO-4217 currency code. Must exactly match the currency used during
-    # authorization.
+    # authorization. If omitted, defaults to the currency originally requested
+    # on the charge.
     # @return [String]
     attr_accessor :currency
 
@@ -29,7 +31,10 @@ module UnivapayClientSdk
 
     # An array for optional fields
     def self.optionals
-      []
+      %w[
+        amount
+        currency
+      ]
     end
 
     # An array for nullable fields
@@ -37,12 +42,12 @@ module UnivapayClientSdk
       []
     end
 
-    def initialize(amount:, currency:, additional_properties: nil)
+    def initialize(amount: SKIP, currency: SKIP, additional_properties: nil)
       # Add additional model properties to the instance
       additional_properties = {} if additional_properties.nil?
 
-      @amount = amount
-      @currency = currency
+      @amount = amount unless amount == SKIP
+      @currency = currency unless currency == SKIP
       @additional_properties = additional_properties
     end
 
@@ -51,8 +56,8 @@ module UnivapayClientSdk
       return nil unless hash
 
       # Extract variables from the hash.
-      amount = hash.key?('amount') ? hash['amount'] : nil
-      currency = hash.key?('currency') ? hash['currency'] : nil
+      amount = hash.key?('amount') ? hash['amount'] : SKIP
+      currency = hash.key?('currency') ? hash['currency'] : SKIP
 
       # Create a new hash for additional properties, removing known properties.
       new_hash = hash.reject { |k, _| names.value?(k) }

@@ -73,6 +73,18 @@ module UnivapayClientSdk
       @direct_debit ||= DirectDebitApi.new @global_configuration
     end
 
+    # Access to checkout controller.
+    # @return [CheckoutApi] Returns the controller instance.
+    def checkout
+      @checkout ||= CheckoutApi.new @global_configuration
+    end
+
+    # Access to transaction_history controller.
+    # @return [TransactionHistoryApi] Returns the controller instance.
+    def transaction_history
+      @transaction_history ||= TransactionHistoryApi.new @global_configuration
+    end
+
     def initialize(
       connection: nil, adapter: :net_http_persistent, timeout: 30,
       max_retries: 0, retry_interval: 1, backoff_factor: 2,

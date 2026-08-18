@@ -12,11 +12,47 @@ module UnivapayClientSdk
     # rubocop:disable Lint/RedundantCopDisableDirective, Style/HashSyntax, Layout/FirstArgumentIndentation
     def self.union_types
       {
+        :TransactionToken => OneOf.new(
+          [
+            LeafType.new(CardTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'card',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(KonbiniTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'konbini',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(OnlineTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'online',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(BankTransferTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'bank_transfer',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(PaidyTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'paidy',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(QrScanTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'qr_scan',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(QrMerchantTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'qr_merchant',
+              discriminator: 'payment_type'
+            ))
+          ]
+        ),
+
         :GenericMetadataValue => AnyOf.new(
           [
             LeafType.new(String),
             LeafType.new(Float),
-            AnyOf.new([LeafType.new(TrueClass), LeafType.new(FalseClass)])
+            AnyOf.new([LeafType.new(TrueClass), LeafType.new(FalseClass)]),
+            LeafType.new(Object, UnionTypeContext.new(
+              is_array: true
+            ))
           ]
         ),
 
@@ -25,7 +61,10 @@ module UnivapayClientSdk
             LeafType.new(TokenCreateCardData),
             LeafType.new(TokenCreateKonbiniData),
             LeafType.new(TokenCreateOnlineData),
-            LeafType.new(TokenCreateBankTransferData)
+            LeafType.new(TokenCreateBankTransferData),
+            LeafType.new(TokenCreatePaidyData),
+            LeafType.new(TokenCreateQrScanData),
+            LeafType.new(TokenCreateQrMerchantData)
           ]
         ),
 
@@ -49,12 +88,36 @@ module UnivapayClientSdk
           )
         ),
 
-        :TransactionTokenData => AnyOf.new(
+        :TransactionToken2 => OneOf.new(
           [
-            LeafType.new(TokenResponseCardData),
-            LeafType.new(TokenResponseKonbiniData),
-            LeafType.new(TokenResponseOnlineData),
-            LeafType.new(TokenResponseBankTransferData)
+            LeafType.new(CardTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'card',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(KonbiniTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'konbini',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(OnlineTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'online',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(BankTransferTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'bank_transfer',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(PaidyTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'paidy',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(QrScanTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'qr_scan',
+              discriminator: 'payment_type'
+            )),
+            LeafType.new(QrMerchantTransactionToken, UnionTypeContext.new(
+              discriminator_value: 'qr_merchant',
+              discriminator: 'payment_type'
+            ))
           ],
           UnionTypeContext.new(
             is_optional: true

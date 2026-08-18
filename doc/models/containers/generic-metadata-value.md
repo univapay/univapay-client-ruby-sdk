@@ -1,11 +1,11 @@
 
 # Generic Metadata Value
 
-Allowed values for metadata properties.
+Allowed values for metadata properties. Values may be a string, number, boolean, null, or an array of any of the above — but not a nested object; the server rejects metadata whose direct property values are JSON objects.
 
 ## Data Type
 
-`String | Float | TrueClass | FalseClass`
+`String | Float | TrueClass | FalseClass | Array[Object]`
 
 ## Cases
 
@@ -14,6 +14,7 @@ Allowed values for metadata properties.
 | `String` |
 | `Float` |
 | `TrueClass \| FalseClass` |
+| `Array[Object]` |
 
 ## String
 
@@ -43,5 +44,18 @@ value = 10
 
 ```ruby
 value = true
+```
+
+## Array[Object]
+
+### Initialization Code
+
+#### Example
+
+```ruby
+value = [
+  JSON.parse('"sale"'),
+  JSON.parse('"promo"')
+]
 ```
 

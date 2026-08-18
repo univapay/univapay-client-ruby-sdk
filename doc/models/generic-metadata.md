@@ -3,7 +3,7 @@
 
 A free-form dictionary for custom metadata.
 
-*This model accepts additional fields of type [String | Float | TrueClass | FalseClass](../../doc/models/containers/generic-metadata-value.md).*
+*This model accepts additional fields of type [String | Float | TrueClass | FalseClass | Array[Object]](../../doc/models/containers/generic-metadata-value.md).*
 
 ## Structure
 
@@ -16,7 +16,7 @@ A free-form dictionary for custom metadata.
 | `order_id` | `String` | Optional | Example of a custom metadata key. |
 | `univapay_name` | `String` | Optional | Consumer name passed to payment processors that require it (e.g., konbini, bank transfer). |
 | `univapay_phone_number` | `String` | Optional | Consumer phone number passed to payment processors that require it. |
-| `additional_properties` | Hash[String, String \| Float \| TrueClass \| FalseClass] | Optional | Allowed values for metadata properties. |
+| `additional_properties` | Hash[String, String \| Float \| TrueClass \| FalseClass \| Array[Object]] | Optional | Allowed values for metadata properties. Values may be a string, number, boolean, null, or an array of any of the above — but not a nested object; the server rejects metadata whose direct property values are JSON objects. |
 
 ## Example
 

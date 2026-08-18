@@ -25,7 +25,7 @@ Request payload for creating a subscription.
 | `first_charge_authorization_only` | `TrueClass \| FalseClass` | Optional | If true, the first charge will only be an authorization (Hold).<br><br>**Default**: `false` |
 | `first_charge_capture_after` | `String` | Optional | ISO-8601 Duration for auto-capture if authorization only is true.  Allowed days: P1D to P6D. |
 | `metadata` | [`GenericMetadata`](../../doc/models/generic-metadata.md) | Optional | A free-form dictionary for custom metadata. |
-| `three_ds` | [`ChargeCreateRequestThreeDs`](../../doc/models/charge-create-request-three-ds.md) | Optional | Charge Create Request Three Ds schema. |
+| `three_ds` | [`ChargeCreateRequestThreeDs`](../../doc/models/charge-create-request-three-ds.md) | Optional | Charge Create Request Three Ds schema. Either supply `mode` (and optionally `redirect_endpoint`) to have Univapay run 3DS, or supply all six external-MPI fields (`authentication_value` through `transaction_status`) when 3DS authentication was already completed outside of Univapay — in that case `mode` is set to `provided` automatically and must not be sent. |
 | `additional_properties` | `Hash[String, Object]` | Optional | - |
 
 ## Example

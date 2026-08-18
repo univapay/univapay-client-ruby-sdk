@@ -122,5 +122,68 @@ module UnivapayClientSdk
                                           APIException))
         .execute
     end
+
+    # Derives a deterministic, store-scoped UUID from a local customer
+    # identifier supplied by the merchant. Calling this endpoint again with the
+    # same `customer_id` for the same store always returns the same UUID — the
+    # operation has no side effects (nothing is persisted), so it is safe to
+    # call repeatedly and does not require an `Idempotency-Key`. App Token
+    # Secret is required.
+    # @param [UUID | String] store_id Required parameter: The unique identifier
+    # of the store.
+    # @param [CreateCustomerIdRequest] body Required parameter: Request payload
+    # for deriving a customer ID.
+    # @return [ApiResponse] Complete http response with raw body and status code.
+    def create_customer_id(store_id,
+                           body)
+      @api_call
+        .request(new_request_builder(HttpMethodEnum::POST,
+                                     '/stores/{storeId}/create_customer_id',
+                                     Server::DEFAULT)
+                   .template_param(new_parameter(store_id, key: 'storeId')
+                                    .is_required(true)
+                                    .should_encode(true))
+                   .header_param(new_parameter('application/json', key: 'Content-Type'))
+                   .body_param(new_parameter(body)
+                                .is_required(true))
+                   .header_param(new_parameter('application/json', key: 'accept'))
+                   .body_serializer(proc do |param| param.to_json unless param.nil? end)
+                   .auth(Single.new('JWT_TOKEN')))
+        .response(new_response_handler
+                    .deserializer(APIHelper.method(:custom_type_deserializer))
+                    .deserialize_into(CreateCustomerIdResponse.method(:from_hash))
+                    .is_api_response(true)
+                    .local_error_template('400',
+                                          'HTTP 400 Bad Request: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('401',
+                                          'HTTP 401 Unauthorized: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('403',
+                                          'HTTP 403 Forbidden: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('404',
+                                          'HTTP 404 Not Found: {$response.body#/code}',
+                                          ApiErrorException)
+                    .local_error_template('429',
+                                          'HTTP 429 Rate Limited: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('409',
+                                          'HTTP 409 Conflict: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('500',
+                                          'HTTP 500 Server Error: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('503',
+                                          'HTTP 503 Unavailable: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('504',
+                                          'HTTP 504 Timeout: {$response.body#/code}',
+                                          APIException)
+                    .local_error_template('default',
+                                          'HTTP {$statusCode}: {$response.body#/code}',
+                                          APIException))
+        .execute
+    end
   end
 end

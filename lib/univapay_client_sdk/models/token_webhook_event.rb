@@ -28,8 +28,10 @@ module UnivapayClientSdk
     # @return [TokenEvent]
     attr_accessor :event
 
-    # Stored transaction token resource.
-    # @return [TransactionToken]
+    # Stored transaction token resource. `payment_type` discriminates which
+    # variant applies — and therefore the concrete shape of `data` — per the
+    # mapping above.
+    # @return [Object]
     attr_accessor :data
 
     # Timestamp when the event was fired.
@@ -80,7 +82,9 @@ module UnivapayClientSdk
       created_on = if hash.key?('created_on')
                      (DateTimeHelper.from_rfc3339(hash['created_on']) if hash['created_on'])
                    end
-      data = TransactionToken.from_hash(hash['data']) if hash['data']
+      data = hash.key?('data') ? APIHelper.deserialize_union_type(
+        UnionTypeLookUp.get(:TransactionToken2), hash['data']
+      ) : SKIP
 
       # Create a new hash for additional properties, removing known properties.
       new_hash = hash.reject { |k, _| names.value?(k) }

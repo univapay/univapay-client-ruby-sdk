@@ -5,7 +5,7 @@ Transaction Token Create Request Data schema.
 
 ## Data Type
 
-`TokenCreateCardData | TokenCreateKonbiniData | TokenCreateOnlineData | TokenCreateBankTransferData`
+`TokenCreateCardData | TokenCreateKonbiniData | TokenCreateOnlineData | TokenCreateBankTransferData | TokenCreatePaidyData | TokenCreateQrScanData | TokenCreateQrMerchantData`
 
 ## Cases
 
@@ -15,6 +15,9 @@ Transaction Token Create Request Data schema.
 | [`TokenCreateKonbiniData`](../../../doc/models/token-create-konbini-data.md) |
 | [`TokenCreateOnlineData`](../../../doc/models/token-create-online-data.md) |
 | [`TokenCreateBankTransferData`](../../../doc/models/token-create-bank-transfer-data.md) |
+| [`TokenCreatePaidyData`](../../../doc/models/token-create-paidy-data.md) |
+| [`TokenCreateQrScanData`](../../../doc/models/token-create-qr-scan-data.md) |
+| [`TokenCreateQrMerchantData`](../../../doc/models/token-create-qr-merchant-data.md) |
 
 ## TokenCreateCardData
 
@@ -75,6 +78,49 @@ value = TokenCreateBankTransferData.new(
   expiration_period: 'PT168H',
   expiration_time_shift: '23:59:59+09:00',
   name: 'Taro Yamada'
+)
+```
+
+## TokenCreatePaidyData
+
+### Initialization Code
+
+#### Example
+
+```ruby
+value = TokenCreatePaidyData.new(
+  paidy_token: 'paidy-token-abc123',
+  shipping_address: TokenCreatePaidyDataShippingAddress.new(
+    zip: '105-0011',
+    line1: '1-1-1',
+    city: 'Minato',
+    state: 'Tokyo'
+  ),
+  phone_number: '08012341234'
+)
+```
+
+## TokenCreateQrScanData
+
+### Initialization Code
+
+#### Example
+
+```ruby
+value = TokenCreateQrScanData.new(
+  scanned_qr: '091234567890123456789012345'
+)
+```
+
+## TokenCreateQrMerchantData
+
+### Initialization Code
+
+#### Example
+
+```ruby
+value = TokenCreateQrMerchantData.new(
+  brand: 'pay_pay_merchant'
 )
 ```
 

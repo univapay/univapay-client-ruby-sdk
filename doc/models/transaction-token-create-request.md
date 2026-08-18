@@ -19,7 +19,7 @@ Request payload for creating a transaction token, which represents a payment met
 | `usage_limit` | `String` | Optional | Usage limit applied to the token. |
 | `ip_address` | `String` | Optional | Consumer's IPv4 address. **Required** when `data.brand` is `we_chat_online` and `data.call_method` is `web` or `http_get`. |
 | `metadata` | [`TransactionTokenCreateRequestMetadata`](../../doc/models/transaction-token-create-request-metadata.md) | Optional | A free-form dictionary for custom metadata. |
-| `data` | [TokenCreateCardData](../../doc/models/token-create-card-data.md) \| [TokenCreateKonbiniData](../../doc/models/token-create-konbini-data.md) \| [TokenCreateOnlineData](../../doc/models/token-create-online-data.md) \| [TokenCreateBankTransferData](../../doc/models/token-create-bank-transfer-data.md) | Required | Transaction Token Create Request Data schema. |
+| `data` | [TokenCreateCardData](../../doc/models/token-create-card-data.md) \| [TokenCreateKonbiniData](../../doc/models/token-create-konbini-data.md) \| [TokenCreateOnlineData](../../doc/models/token-create-online-data.md) \| [TokenCreateBankTransferData](../../doc/models/token-create-bank-transfer-data.md) \| [TokenCreatePaidyData](../../doc/models/token-create-paidy-data.md) \| [TokenCreateQrScanData](../../doc/models/token-create-qr-scan-data.md) \| [TokenCreateQrMerchantData](../../doc/models/token-create-qr-merchant-data.md) | Required | Transaction Token Create Request Data schema. |
 | `additional_properties` | `Hash[String, Object]` | Optional | - |
 
 ## Example

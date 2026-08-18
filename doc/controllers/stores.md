@@ -14,6 +14,7 @@ stores_api = client.stores
 
 * [List Stores](../../doc/controllers/stores.md#list-stores)
 * [Get Store](../../doc/controllers/stores.md#get-store)
+* [Create Customer Id](../../doc/controllers/stores.md#create-customer-id)
 
 
 # List Stores
@@ -194,6 +195,64 @@ end
       "enabled": true,
       "match_amount": true,
       "expiration": "P7D"
+    },
+    "qr_scan_configuration": {
+      "enabled": true,
+      "forbidden_qr_scan_gateways": [
+        "wechat"
+      ]
+    },
+    "convenience_configuration": {
+      "enabled": true,
+      "expiration": "P3D"
+    },
+    "paidy_configuration": {
+      "enabled": false
+    },
+    "recurring_token_configuration": {
+      "recurring_type": "infinite",
+      "charge_wait_period": "P7D",
+      "card_charge_cvv_confirmation": {
+        "enabled": false
+      }
+    },
+    "security_configuration": {
+      "card_charge_cooldown": "PT5M",
+      "subscription_cooldown": "PT10M",
+      "restrict_ip_after_failed_charge": {
+        "enabled": true,
+        "count": 5,
+        "cooldown": "PT1H"
+      },
+      "refund_percent_limit": 100,
+      "confirmation_required": false,
+      "min_refund_threshold": 100,
+      "limit_refund_by_sales": {
+        "enabled": true,
+        "period": "monthly",
+        "rolling_window": true
+      }
+    },
+    "installments_configuration": {
+      "enabled": true,
+      "card_processor": {
+        "revolving": true,
+        "fixed_cycle": true
+      },
+      "supported_payment_types": [
+        "card"
+      ],
+      "min_charge_amount": {
+        "amount": 3000,
+        "currency": "JPY"
+      },
+      "max_payout_period": "P12M",
+      "only_with_processor": true
+    },
+    "card_brand_percent_fees": {
+      "visa": 3.6,
+      "mastercard": 3.6,
+      "jcb": 3.8
     }
   }
 }
@@ -203,6 +262,72 @@ end
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
+| 401 | Unauthorized (401). Authentication failed.  Common codes: AUTH_HEADER_MISSING, INVALID_APP_TOKEN, INVALID_CREDENTIALS. | [`ApiErrorException`](../../doc/models/api-error-exception.md) |
+| 403 | Forbidden (403). The request is understood, but access is refused.  This occurs if permissions are insufficient or if a security lock is triggered. | [`ApiErrorException`](../../doc/models/api-error-exception.md) |
+| 404 | Not Found (404). The requested resource (e.g., Store ID or Token ID) does not exist. | [`ApiErrorException`](../../doc/models/api-error-exception.md) |
+| 429 | Too Many Requests (429). Rate limit exceeded. Returns an empty JSON object in this spec. | `APIException` |
+
+
+# Create Customer Id
+
+Derives a deterministic, store-scoped UUID from a local customer identifier supplied by the merchant. Calling this endpoint again with the same `customer_id` for the same store always returns the same UUID — the operation has no side effects (nothing is persisted), so it is safe to call repeatedly and does not require an `Idempotency-Key`. App Token Secret is required.
+
+```ruby
+def create_customer_id(store_id,
+                       body)
+```
+
+## Authentication
+
+This endpoint requires [JWT_TOKEN](../../doc/auth/oauth-2-bearer-token.md)
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `store_id` | `UUID \| String` | Template, Required | The unique identifier of the store. |
+| `body` | [`CreateCustomerIdRequest`](../../doc/models/create-customer-id-request.md) | Body, Required | Request payload for deriving a customer ID. |
+
+## Response Type
+
+**200**: Customer ID derived successfully.
+
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `data` property of this instance returns the response data which is of type [`CreateCustomerIdResponse`](../../doc/models/create-customer-id-response.md).
+
+## Example Usage
+
+```ruby
+store_id = '0cab399b-5621-425b-993b-f8507eba1e78'
+
+body = CreateCustomerIdRequest.new(
+  customer_id: 'local-customer-1902'
+)
+
+result = stores_api.create_customer_id(
+  store_id,
+  body
+)
+
+if result.success?
+  puts result.data
+elsif result.error?
+  warn result.errors
+end
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "customer_id": "8a3f1b8e-2c1a-4b7a-9c2e-6f6b6f6e2b10"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request (400). The request was invalid or could not be processed.  Common codes: VALIDATION_ERROR, INVALID_TOKEN_TYPE, NOT_SUPPORTED_BY_PROCESSOR. | [`ApiErrorException`](../../doc/models/api-error-exception.md) |
 | 401 | Unauthorized (401). Authentication failed.  Common codes: AUTH_HEADER_MISSING, INVALID_APP_TOKEN, INVALID_CREDENTIALS. | [`ApiErrorException`](../../doc/models/api-error-exception.md) |
 | 403 | Forbidden (403). The request is understood, but access is refused.  This occurs if permissions are insufficient or if a security lock is triggered. | [`ApiErrorException`](../../doc/models/api-error-exception.md) |
 | 404 | Not Found (404). The requested resource (e.g., Store ID or Token ID) does not exist. | [`ApiErrorException`](../../doc/models/api-error-exception.md) |

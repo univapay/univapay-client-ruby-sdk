@@ -17,7 +17,16 @@ module UnivapayClientSdk
       KONBINI = 'konbini'.freeze,
 
       # TODO: Write general description for BANK_TRANSFER
-      BANK_TRANSFER = 'bank_transfer'.freeze
+      BANK_TRANSFER = 'bank_transfer'.freeze,
+
+      # TODO: Write general description for QR_SCAN
+      QR_SCAN = 'qr_scan'.freeze,
+
+      # TODO: Write general description for QR_MERCHANT
+      QR_MERCHANT = 'qr_merchant'.freeze,
+
+      # TODO: Write general description for PAIDY
+      PAIDY = 'paidy'.freeze
     ].freeze
 
     def self.validate(value)
@@ -36,6 +45,9 @@ module UnivapayClientSdk
       when 'online' then ONLINE
       when 'konbini' then KONBINI
       when 'bank_transfer' then BANK_TRANSFER
+      when 'qr_scan' then QR_SCAN
+      when 'qr_merchant' then QR_MERCHANT
+      when 'paidy' then PAIDY
       else
         default_value
       end

@@ -67,13 +67,20 @@ class TransactionTokensApiTest < ApiTestBase
   # Lists all transaction tokens across all stores.
   def test_list_all_transaction_tokens
     # Parameters for the API call
+    search = 'tokyo'
+    customer_id = '8a3f1b8e-2c1a-4b7a-9c2e-6f6b6f6e2b10'
+    type = 'recurring'
+    mode = 'live'
+    active = 'active'
     limit = 10
     cursor = '3541d4fa-596d-428e-8a36-f274e1b3d505'
     cursor_direction = 'desc'
 
     # Perform the API call through the SDK function
     result = @controller.list_all_transaction_tokens(
-      limit: limit, cursor: cursor, cursor_direction: cursor_direction
+      search: search, customer_id: customer_id, type: type, mode: mode,
+      active: active, limit: limit, cursor: cursor,
+      cursor_direction: cursor_direction
     )
 
     # Test response code
@@ -114,13 +121,19 @@ class TransactionTokensApiTest < ApiTestBase
   def test_list_store_transaction_tokens
     # Parameters for the API call
     store_id = '0cab399b-5621-425b-993b-f8507eba1e78'
+    search = 'tokyo'
+    customer_id = '8a3f1b8e-2c1a-4b7a-9c2e-6f6b6f6e2b10'
+    type = 'recurring'
+    mode = 'live'
+    active = 'active'
     limit = 10
     cursor = '3541d4fa-596d-428e-8a36-f274e1b3d505'
     cursor_direction = 'desc'
 
     # Perform the API call through the SDK function
     result = @controller.list_store_transaction_tokens(
-      store_id, limit: limit, cursor: cursor,
+      store_id, search: search, customer_id: customer_id, type: type,
+      mode: mode, active: active, limit: limit, cursor: cursor,
       cursor_direction: cursor_direction
     )
 
@@ -163,9 +176,10 @@ class TransactionTokensApiTest < ApiTestBase
     # Parameters for the API call
     store_id = '0cab399b-5621-425b-993b-f8507eba1e78'
     id = 'c4e87129-cad4-47fb-8ded-b4c0a4ae0dd4'
+    polling = true
 
     # Perform the API call through the SDK function
-    result = @controller.get_transaction_token(store_id, id)
+    result = @controller.get_transaction_token(store_id, id, polling: polling)
 
     # Test response code
     assert_equal(200, @response_catcher.response.status_code)
@@ -268,6 +282,95 @@ class TransactionTokensApiTest < ApiTestBase
 
     # Test response code
     assert_equal(204, @response_catcher.response.status_code)
+  end
+
+  # Enables 3-D Secure on an existing `recurring` transaction token that was created without it. Only applies to `recurring` tokens; returns an error if 3DS is already enabled. After calling this endpoint, poll the token until `data.three_ds.status` becomes `awaiting`, then use the token 3DS issuer token endpoint to complete authentication.
+  def test_enable_token_three_ds
+    # Parameters for the API call
+    store_id = '0cab399b-5621-425b-993b-f8507eba1e78'
+    id = 'c4e87129-cad4-47fb-8ded-b4c0a4ae0dd4'
+    idempotency_key = 'f64be872-353d-4c3c-84cb-3dc617fe89f7'
+    body = EnableTokenThreeDsRequest.from_hash(APIHelper.json_deserialize(
+      '{"redirect_endpoint":"https://univapay.com/3ds-redirect"}', false))
+
+    # Perform the API call through the SDK function
+    result = @controller.enable_token_three_ds(store_id, id,
+                                               idempotency_key: idempotency_key,
+                                               body: body)
+
+    # Test response code
+    assert_equal(200, @response_catcher.response.status_code)
+    # Test headers
+    expected_headers = {}
+    expected_headers['content-type'] = 'application/json; charset=utf-8'
+
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
+
+    # Test whether the captured response is as we expected
+    refute_nil(result)
+    expected_body = JSON.parse(
+      '{"id":"11f11e85-e9e9-b198-b990-c3a715943241","store_id":"11f0e274-1e3b-'\
+      '4752-9513-33d3e07ede13","email":"test@test.com","payment_type":"card","'\
+      'active":true,"mode":"live","type":"recurring","usage_limit":null,"confi'\
+      'rmed":null,"metadata":{"univapay-link-id":"11f11e85-1b45-dace-bf3d-cbca'\
+      'e52f65fc","univapay-name":"test","univapay-phone-number":"+81 080123412'\
+      '34"},"created_on":"2026-03-13T02:39:52.908468Z","updated_on":"2026-03-1'\
+      '3T02:39:52.908468Z","last_used_on":null,"data":{"card":{"cardholder":"T'\
+      'EST TEST","exp_month":9,"exp_year":2026,"card_bin":"424242","last_four"'\
+      ':"424242","brand":"visa","card_type":"credit","country":"JP","category"'\
+      ':"standard","issuer":"issuer","sub_brand":"none"},"billing":{"line1":nu'\
+      'll,"line2":null,"state":null,"city":null,"country":null,"zip":null,"pho'\
+      'ne_number":{"country_code":81,"local_number":"08012341234"}},"cvv_autho'\
+      'rize":{"enabled":false,"status":null,"charge_id":null,"credentials_id":'\
+      'null,"currency":null},"cvv_authorize_check":{"status":null,"charge_id":'\
+      'null,"date":null},"three_ds":{"enabled":true,"status":"pending","redire'\
+      'ct_endpoint":"https://univapay.com/redirect/index.html","error":null,"e'\
+      'xempted":false}}}'
+    )
+    received_body = JSON.parse(@response_catcher.response.raw_body)
+    assert(ComparisonHelper.match_body(expected_body, received_body))
+  end
+
+  # Disables 3-D Secure on an existing `recurring` transaction token. Only applies to `recurring` tokens.
+  def test_disable_token_three_ds
+    # Parameters for the API call
+    store_id = '0cab399b-5621-425b-993b-f8507eba1e78'
+    id = 'c4e87129-cad4-47fb-8ded-b4c0a4ae0dd4'
+
+    # Perform the API call through the SDK function
+    result = @controller.disable_token_three_ds(store_id, id)
+
+    # Test response code
+    assert_equal(200, @response_catcher.response.status_code)
+    # Test headers
+    expected_headers = {}
+    expected_headers['content-type'] = 'application/json; charset=utf-8'
+
+    assert(ComparisonHelper.match_headers(expected_headers, @response_catcher.response.headers))
+
+    # Test whether the captured response is as we expected
+    refute_nil(result)
+    expected_body = JSON.parse(
+      '{"id":"11f11e85-e9e9-b198-b990-c3a715943241","store_id":"11f0e274-1e3b-'\
+      '4752-9513-33d3e07ede13","email":"test@test.com","payment_type":"card","'\
+      'active":true,"mode":"live","type":"recurring","usage_limit":null,"confi'\
+      'rmed":null,"metadata":{"univapay-link-id":"11f11e85-1b45-dace-bf3d-cbca'\
+      'e52f65fc","univapay-name":"test","univapay-phone-number":"+81 080123412'\
+      '34"},"created_on":"2026-03-13T02:39:52.908468Z","updated_on":"2026-03-1'\
+      '3T02:39:52.908468Z","last_used_on":null,"data":{"card":{"cardholder":"T'\
+      'EST TEST","exp_month":9,"exp_year":2026,"card_bin":"424242","last_four"'\
+      ':"424242","brand":"visa","card_type":"credit","country":"JP","category"'\
+      ':"standard","issuer":"issuer","sub_brand":"none"},"billing":{"line1":nu'\
+      'll,"line2":null,"state":null,"city":null,"country":null,"zip":null,"pho'\
+      'ne_number":{"country_code":81,"local_number":"08012341234"}},"cvv_autho'\
+      'rize":{"enabled":false,"status":null,"charge_id":null,"credentials_id":'\
+      'null,"currency":null},"cvv_authorize_check":{"status":null,"charge_id":'\
+      'null,"date":null},"three_ds":{"enabled":true,"status":"pending","redire'\
+      'ct_endpoint":"https://univapay.com/redirect/index.html","error":null,"e'\
+      'xempted":false}}}'
+    )
+    received_body = JSON.parse(@response_catcher.response.raw_body)
+    assert(ComparisonHelper.match_body(expected_body, received_body))
   end
 
   # Retrieves the information required to execute 3-D Secure authentication when creating a recurring transaction token.

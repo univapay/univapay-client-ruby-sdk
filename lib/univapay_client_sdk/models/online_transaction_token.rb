@@ -5,8 +5,8 @@
 
 require 'date'
 module UnivapayClientSdk
-  # Stored transaction token resource.
-  class TransactionToken < BaseModel
+  # Stored transaction token resource for an `online` payment type.
+  class OnlineTransactionToken < BaseModel
     SKIP = Object.new
     private_constant :SKIP
 
@@ -21,10 +21,6 @@ module UnivapayClientSdk
     # Customer email address.
     # @return [String]
     attr_accessor :email
-
-    # Transaction Token Payment Type schema.
-    # @return [TransactionTokenPaymentType]
-    attr_accessor :payment_type
 
     # Whether the resource is active.
     # @return [TrueClass | FalseClass]
@@ -62,9 +58,12 @@ module UnivapayClientSdk
     # @return [DateTime]
     attr_accessor :last_used_on
 
-    # Transaction token data payload. The actual structure depends on
-    # `payment_type` — card, konbini, online (QR / 3DS), or bank transfer.
-    # @return [Object]
+    # Payment method type. Always `online` for this variant.
+    # @return [String]
+    attr_reader :payment_type
+
+    # Token Response Online Data schema.
+    # @return [TokenResponseOnlineData]
     attr_accessor :data
 
     # A mapping from model property names to API property names.
@@ -73,7 +72,6 @@ module UnivapayClientSdk
       @_hash['id'] = 'id'
       @_hash['store_id'] = 'store_id'
       @_hash['email'] = 'email'
-      @_hash['payment_type'] = 'payment_type'
       @_hash['active'] = 'active'
       @_hash['mode'] = 'mode'
       @_hash['type'] = 'type'
@@ -83,6 +81,7 @@ module UnivapayClientSdk
       @_hash['created_on'] = 'created_on'
       @_hash['updated_on'] = 'updated_on'
       @_hash['last_used_on'] = 'last_used_on'
+      @_hash['payment_type'] = 'payment_type'
       @_hash['data'] = 'data'
       @_hash
     end
@@ -93,7 +92,6 @@ module UnivapayClientSdk
         id
         store_id
         email
-        payment_type
         active
         mode
         type
@@ -103,7 +101,6 @@ module UnivapayClientSdk
         created_on
         updated_on
         last_used_on
-        data
       ]
     end
 
@@ -117,18 +114,16 @@ module UnivapayClientSdk
       ]
     end
 
-    def initialize(id: SKIP, store_id: SKIP, email: SKIP, payment_type: SKIP,
-                   active: SKIP, mode: SKIP, type: SKIP, usage_limit: SKIP,
-                   confirmed: SKIP, metadata: SKIP, created_on: SKIP,
-                   updated_on: SKIP, last_used_on: SKIP, data: SKIP,
-                   additional_properties: nil)
+    def initialize(data:, id: SKIP, store_id: SKIP, email: SKIP, active: SKIP,
+                   mode: SKIP, type: SKIP, usage_limit: SKIP, confirmed: SKIP,
+                   metadata: SKIP, created_on: SKIP, updated_on: SKIP,
+                   last_used_on: SKIP, additional_properties: nil)
       # Add additional model properties to the instance
       additional_properties = {} if additional_properties.nil?
 
       @id = id unless id == SKIP
       @store_id = store_id unless store_id == SKIP
       @email = email unless email == SKIP
-      @payment_type = payment_type unless payment_type == SKIP
       @active = active unless active == SKIP
       @mode = mode unless mode == SKIP
       @type = type unless type == SKIP
@@ -138,7 +133,8 @@ module UnivapayClientSdk
       @created_on = created_on unless created_on == SKIP
       @updated_on = updated_on unless updated_on == SKIP
       @last_used_on = last_used_on unless last_used_on == SKIP
-      @data = data unless data == SKIP
+      @payment_type = 'online'
+      @data = data
       @additional_properties = additional_properties
     end
 
@@ -147,10 +143,10 @@ module UnivapayClientSdk
       return nil unless hash
 
       # Extract variables from the hash.
+      data = TokenResponseOnlineData.from_hash(hash['data']) if hash['data']
       id = hash.key?('id') ? hash['id'] : SKIP
       store_id = hash.key?('store_id') ? hash['store_id'] : SKIP
       email = hash.key?('email') ? hash['email'] : SKIP
-      payment_type = hash.key?('payment_type') ? hash['payment_type'] : SKIP
       active = hash.key?('active') ? hash['active'] : SKIP
       mode = hash.key?('mode') ? hash['mode'] : SKIP
       type = hash.key?('type') ? hash['type'] : SKIP
@@ -174,9 +170,6 @@ module UnivapayClientSdk
                      else
                        SKIP
                      end
-      data = hash.key?('data') ? APIHelper.deserialize_union_type(
-        UnionTypeLookUp.get(:TransactionTokenData), hash['data']
-      ) : SKIP
 
       # Create a new hash for additional properties, removing known properties.
       new_hash = hash.reject { |k, _| names.value?(k) }
@@ -186,21 +179,20 @@ module UnivapayClientSdk
       )
 
       # Create object from extracted values.
-      TransactionToken.new(id: id,
-                           store_id: store_id,
-                           email: email,
-                           payment_type: payment_type,
-                           active: active,
-                           mode: mode,
-                           type: type,
-                           usage_limit: usage_limit,
-                           confirmed: confirmed,
-                           metadata: metadata,
-                           created_on: created_on,
-                           updated_on: updated_on,
-                           last_used_on: last_used_on,
-                           data: data,
-                           additional_properties: additional_properties)
+      OnlineTransactionToken.new(data: data,
+                                 id: id,
+                                 store_id: store_id,
+                                 email: email,
+                                 active: active,
+                                 mode: mode,
+                                 type: type,
+                                 usage_limit: usage_limit,
+                                 confirmed: confirmed,
+                                 metadata: metadata,
+                                 created_on: created_on,
+                                 updated_on: updated_on,
+                                 last_used_on: last_used_on,
+                                 additional_properties: additional_properties)
     end
 
     def to_custom_created_on
@@ -216,34 +208,48 @@ module UnivapayClientSdk
     end
 
     # Validates an instance of the object from a given value.
-    # @param [TransactionToken | Hash] The value against the validation is performed.
+    # @param [OnlineTransactionToken | Hash] The value against the validation is performed.
     def self.validate(value)
-      return true if value.instance_of? self
+      if value.instance_of? self
+        return (
+          APIHelper.valid_type?(value.payment_type,
+                                ->(val) { val.instance_of? String }) and
+            APIHelper.valid_type?(value.data,
+                                  ->(val) { TokenResponseOnlineData.validate(val) },
+                                  is_model_hash: true)
+        )
+      end
 
       return false unless value.instance_of? Hash
 
-      true
+      (
+        APIHelper.valid_type?(value['payment_type'],
+                              ->(val) { val.instance_of? String }) and
+          APIHelper.valid_type?(value['data'],
+                                ->(val) { TokenResponseOnlineData.validate(val) },
+                                is_model_hash: true)
+      )
     end
 
     # Provides a human-readable string representation of the object.
     def to_s
       class_name = self.class.name.split('::').last
-      "<#{class_name} id: #{@id}, store_id: #{@store_id}, email: #{@email}, payment_type:"\
-      " #{@payment_type}, active: #{@active}, mode: #{@mode}, type: #{@type}, usage_limit:"\
-      " #{@usage_limit}, confirmed: #{@confirmed}, metadata: #{@metadata}, created_on:"\
-      " #{@created_on}, updated_on: #{@updated_on}, last_used_on: #{@last_used_on}, data:"\
-      " #{@data}, additional_properties: #{@additional_properties}>"
+      "<#{class_name} id: #{@id}, store_id: #{@store_id}, email: #{@email}, active: #{@active},"\
+      " mode: #{@mode}, type: #{@type}, usage_limit: #{@usage_limit}, confirmed: #{@confirmed},"\
+      " metadata: #{@metadata}, created_on: #{@created_on}, updated_on: #{@updated_on},"\
+      " last_used_on: #{@last_used_on}, payment_type: #{@payment_type}, data: #{@data},"\
+      " additional_properties: #{@additional_properties}>"
     end
 
     # Provides a debugging-friendly string with detailed object information.
     def inspect
       class_name = self.class.name.split('::').last
       "<#{class_name} id: #{@id.inspect}, store_id: #{@store_id.inspect}, email:"\
-      " #{@email.inspect}, payment_type: #{@payment_type.inspect}, active: #{@active.inspect},"\
-      " mode: #{@mode.inspect}, type: #{@type.inspect}, usage_limit: #{@usage_limit.inspect},"\
-      " confirmed: #{@confirmed.inspect}, metadata: #{@metadata.inspect}, created_on:"\
-      " #{@created_on.inspect}, updated_on: #{@updated_on.inspect}, last_used_on:"\
-      " #{@last_used_on.inspect}, data: #{@data.inspect}, additional_properties:"\
+      " #{@email.inspect}, active: #{@active.inspect}, mode: #{@mode.inspect}, type:"\
+      " #{@type.inspect}, usage_limit: #{@usage_limit.inspect}, confirmed: #{@confirmed.inspect},"\
+      " metadata: #{@metadata.inspect}, created_on: #{@created_on.inspect}, updated_on:"\
+      " #{@updated_on.inspect}, last_used_on: #{@last_used_on.inspect}, payment_type:"\
+      " #{@payment_type.inspect}, data: #{@data.inspect}, additional_properties:"\
       " #{@additional_properties}>"
     end
   end

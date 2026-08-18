@@ -86,6 +86,64 @@ end
       "enabled": true,
       "match_amount": true,
       "expiration": "P7D"
+    },
+    "qr_scan_configuration": {
+      "enabled": true,
+      "forbidden_qr_scan_gateways": [
+        "wechat"
+      ]
+    },
+    "convenience_configuration": {
+      "enabled": true,
+      "expiration": "P3D"
+    },
+    "paidy_configuration": {
+      "enabled": false
+    },
+    "recurring_token_configuration": {
+      "recurring_type": "infinite",
+      "charge_wait_period": "P7D",
+      "card_charge_cvv_confirmation": {
+        "enabled": false
+      }
+    },
+    "security_configuration": {
+      "card_charge_cooldown": "PT5M",
+      "subscription_cooldown": "PT10M",
+      "restrict_ip_after_failed_charge": {
+        "enabled": true,
+        "count": 5,
+        "cooldown": "PT1H"
+      },
+      "refund_percent_limit": 100,
+      "confirmation_required": false,
+      "min_refund_threshold": 100,
+      "limit_refund_by_sales": {
+        "enabled": true,
+        "period": "monthly",
+        "rolling_window": true
+      }
+    },
+    "installments_configuration": {
+      "enabled": true,
+      "card_processor": {
+        "revolving": true,
+        "fixed_cycle": true
+      },
+      "supported_payment_types": [
+        "card"
+      ],
+      "min_charge_amount": {
+        "amount": 3000,
+        "currency": "JPY"
+      },
+      "max_payout_period": "P12M",
+      "only_with_processor": true
+    },
+    "card_brand_percent_fees": {
+      "visa": 3.6,
+      "mastercard": 3.6,
+      "jcb": 3.8
     }
   },
   "created_on": "2026-04-09T07:35:50.000000Z"

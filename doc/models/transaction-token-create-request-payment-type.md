@@ -15,10 +15,13 @@ Transaction Token Create Request Payment Type schema.
 | `ONLINE` |
 | `KONBINI` |
 | `BANK_TRANSFER` |
+| `QR_SCAN` |
+| `QR_MERCHANT` |
+| `PAIDY` |
 
 ## Example
 
 ```ruby
-transaction_token_create_request_payment_type = TransactionTokenCreateRequestPaymentType::CARD
+transaction_token_create_request_payment_type = TransactionTokenCreateRequestPaymentType::QR_SCAN
 ```
 

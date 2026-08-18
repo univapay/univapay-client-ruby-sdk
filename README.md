@@ -36,16 +36,16 @@ We will assume that all requests are going to originate from a backend server th
 Install the gem from the command line:
 
 ```bash
-gem install univapay-client-sdk -v 1.0.2
+gem install univapay-client-sdk -v 1.1.0
 ```
 
 Or add the gem to your Gemfile and run `bundle`:
 
 ```ruby
-gem 'univapay-client-sdk', '1.0.2'
+gem 'univapay-client-sdk', '1.1.0'
 ```
 
-For additional gem details, see the [RubyGems page for the univapay-client-sdk gem](https://rubygems.org/gems/univapay-client-sdk/versions/1.0.2).
+For additional gem details, see the [RubyGems page for the univapay-client-sdk gem](https://rubygems.org/gems/univapay-client-sdk/versions/1.1.0).
 
 ## IRB Console Usage
 
@@ -173,6 +173,7 @@ This API uses the following authentication schemes.
 
 * [Transaction Tokens](doc/controllers/transaction-tokens.md)
 * [Direct Debit](doc/controllers/direct-debit.md)
+* [Transaction History](doc/controllers/transaction-history.md)
 * [Charges](doc/controllers/charges.md)
 * [Refunds](doc/controllers/refunds.md)
 * [Subscriptions](doc/controllers/subscriptions.md)
@@ -180,6 +181,7 @@ This API uses the following authentication schemes.
 * [Merchants](doc/controllers/merchants.md)
 * [Stores](doc/controllers/stores.md)
 * [Webhooks](doc/controllers/webhooks.md)
+* [Checkout](doc/controllers/checkout.md)
 
 ## Webhooks
 

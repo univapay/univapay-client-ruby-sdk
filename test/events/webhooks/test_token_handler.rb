@@ -57,6 +57,38 @@ end
         },
         :created_on => "2026-04-09T07:35:50.000000Z",
         :updated_on => "2026-04-09T07:35:50.000000Z",
+        :data => {
+          :card => {
+            :cardholder => "TARO YAMADA",
+            :exp_month => 12,
+            :exp_year => 2026,
+            :brand => "visa",
+            :last_four => "4242",
+            :card_bin => "card_bin0",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :cvv_authorize => {
+            :enabled => true,
+            :status => "current",
+            :charge_id => nil,
+            :credentials_id => nil,
+            :currency => "JPY",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :billing => nil,
+          :cvv_authorize_check => nil,
+          :three_ds => nil,
+          :exampleAdditionalProperty => {
+            :key1 => "val1",
+            :key2 => "val2"
+          }
+        },
         :exampleAdditionalProperty => {
           :key1 => "val1",
           :key2 => "val2"
@@ -97,6 +129,38 @@ end
         },
         :created_on => "2026-04-09T07:35:50.000000Z",
         :updated_on => "2026-04-09T07:35:50.000000Z",
+        :data => {
+          :card => {
+            :cardholder => "TARO YAMADA",
+            :exp_month => 12,
+            :exp_year => 2026,
+            :brand => "visa",
+            :last_four => "4242",
+            :card_bin => "card_bin0",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :cvv_authorize => {
+            :enabled => true,
+            :status => "current",
+            :charge_id => nil,
+            :credentials_id => nil,
+            :currency => "JPY",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :billing => nil,
+          :cvv_authorize_check => nil,
+          :three_ds => nil,
+          :exampleAdditionalProperty => {
+            :key1 => "val1",
+            :key2 => "val2"
+          }
+        },
         :exampleAdditionalProperty => {
           :key1 => "val1",
           :key2 => "val2"
@@ -137,6 +201,38 @@ end
         },
         :created_on => "2026-04-09T07:35:50.000000Z",
         :updated_on => "2026-04-09T07:35:50.000000Z",
+        :data => {
+          :card => {
+            :cardholder => "TARO YAMADA",
+            :exp_month => 12,
+            :exp_year => 2026,
+            :brand => "visa",
+            :last_four => "4242",
+            :card_bin => "card_bin0",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :cvv_authorize => {
+            :enabled => true,
+            :status => "current",
+            :charge_id => nil,
+            :credentials_id => nil,
+            :currency => "JPY",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :billing => nil,
+          :cvv_authorize_check => nil,
+          :three_ds => nil,
+          :exampleAdditionalProperty => {
+            :key1 => "val1",
+            :key2 => "val2"
+          }
+        },
         :exampleAdditionalProperty => {
           :key1 => "val1",
           :key2 => "val2"
@@ -177,6 +273,38 @@ end
         },
         :created_on => "2026-04-09T07:35:50.000000Z",
         :updated_on => "2026-04-09T07:35:50.000000Z",
+        :data => {
+          :card => {
+            :cardholder => "TARO YAMADA",
+            :exp_month => 12,
+            :exp_year => 2026,
+            :brand => "visa",
+            :last_four => "4242",
+            :card_bin => "card_bin0",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :cvv_authorize => {
+            :enabled => true,
+            :status => "current",
+            :charge_id => nil,
+            :credentials_id => nil,
+            :currency => "JPY",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :billing => nil,
+          :cvv_authorize_check => nil,
+          :three_ds => nil,
+          :exampleAdditionalProperty => {
+            :key1 => "val1",
+            :key2 => "val2"
+          }
+        },
         :exampleAdditionalProperty => {
           :key1 => "val1",
           :key2 => "val2"
@@ -217,6 +345,38 @@ end
         },
         :created_on => "2026-04-09T07:35:50.000000Z",
         :updated_on => "2026-04-09T07:35:50.000000Z",
+        :data => {
+          :card => {
+            :cardholder => "TARO YAMADA",
+            :exp_month => 12,
+            :exp_year => 2026,
+            :brand => "visa",
+            :last_four => "4242",
+            :card_bin => "card_bin0",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :cvv_authorize => {
+            :enabled => true,
+            :status => "current",
+            :charge_id => nil,
+            :credentials_id => nil,
+            :currency => "JPY",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :billing => nil,
+          :cvv_authorize_check => nil,
+          :three_ds => nil,
+          :exampleAdditionalProperty => {
+            :key1 => "val1",
+            :key2 => "val2"
+          }
+        },
         :exampleAdditionalProperty => {
           :key1 => "val1",
           :key2 => "val2"
@@ -257,6 +417,38 @@ end
         },
         :created_on => "2026-04-09T07:35:50.000000Z",
         :updated_on => "2026-04-09T07:35:50.000000Z",
+        :data => {
+          :card => {
+            :cardholder => "TARO YAMADA",
+            :exp_month => 12,
+            :exp_year => 2026,
+            :brand => "visa",
+            :last_four => "4242",
+            :card_bin => "card_bin0",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :cvv_authorize => {
+            :enabled => true,
+            :status => "current",
+            :charge_id => nil,
+            :credentials_id => nil,
+            :currency => "JPY",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :billing => nil,
+          :cvv_authorize_check => nil,
+          :three_ds => nil,
+          :exampleAdditionalProperty => {
+            :key1 => "val1",
+            :key2 => "val2"
+          }
+        },
         :exampleAdditionalProperty => {
           :key1 => "val1",
           :key2 => "val2"
@@ -297,6 +489,38 @@ end
         },
         :created_on => "2026-04-09T07:35:50.000000Z",
         :updated_on => "2026-04-09T07:35:50.000000Z",
+        :data => {
+          :card => {
+            :cardholder => "TARO YAMADA",
+            :exp_month => 12,
+            :exp_year => 2026,
+            :brand => "visa",
+            :last_four => "4242",
+            :card_bin => "card_bin0",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :cvv_authorize => {
+            :enabled => true,
+            :status => "current",
+            :charge_id => nil,
+            :credentials_id => nil,
+            :currency => "JPY",
+            :exampleAdditionalProperty => {
+              :key1 => "val1",
+              :key2 => "val2"
+            }
+          },
+          :billing => nil,
+          :cvv_authorize_check => nil,
+          :three_ds => nil,
+          :exampleAdditionalProperty => {
+            :key1 => "val1",
+            :key2 => "val2"
+          }
+        },
         :exampleAdditionalProperty => {
           :key1 => "val1",
           :key2 => "val2"

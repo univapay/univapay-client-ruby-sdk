@@ -41,7 +41,21 @@ class MerchantsApiTest < ApiTestBase
       'd_configuration":{"enabled":true,"debit_enabled":true,"prepaid_enabled"'\
       ':false,"three_ds_required":true},"online_configuration":{"enabled":true'\
       '},"bank_transfer_configuration":{"enabled":true,"match_amount":true,"ex'\
-      'piration":"P7D"}},"created_on":"2026-04-09T07:35:50.000000Z"}'
+      'piration":"P7D"},"qr_scan_configuration":{"enabled":true,"forbidden_qr_'\
+      'scan_gateways":["wechat"]},"convenience_configuration":{"enabled":true,'\
+      '"expiration":"P3D"},"paidy_configuration":{"enabled":false},"recurring_'\
+      'token_configuration":{"recurring_type":"infinite","charge_wait_period":'\
+      '"P7D","card_charge_cvv_confirmation":{"enabled":false}},"security_confi'\
+      'guration":{"card_charge_cooldown":"PT5M","subscription_cooldown":"PT10M'\
+      '","restrict_ip_after_failed_charge":{"enabled":true,"count":5,"cooldown'\
+      '":"PT1H"},"refund_percent_limit":100,"confirmation_required":false,"min'\
+      '_refund_threshold":100,"limit_refund_by_sales":{"enabled":true,"period"'\
+      ':"monthly","rolling_window":true}},"installments_configuration":{"enabl'\
+      'ed":true,"card_processor":{"revolving":true,"fixed_cycle":true},"suppor'\
+      'ted_payment_types":["card"],"min_charge_amount":{"amount":3000,"currenc'\
+      'y":"JPY"},"max_payout_period":"P12M","only_with_processor":true},"card_'\
+      'brand_percent_fees":{"visa":3.6,"mastercard":3.6,"jcb":3.8}},"created_o'\
+      'n":"2026-04-09T07:35:50.000000Z"}'
     )
     received_body = JSON.parse(@response_catcher.response.raw_body)
     assert(ComparisonHelper.match_body(expected_body, received_body))
