@@ -31,6 +31,22 @@ subscription_list = SubscriptionList.new(
       currency: 'USD',
       amount_formatted: 12.5,
       status: SubscriptionStatus::CURRENT,
+      three_ds: SubscriptionThreeDs.new(
+        mode: SubscriptionThreeDsMode::NORMAL,
+        redirect_endpoint: nil,
+        redirect_id: nil,
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
+      ),
+      subscription_plan: SubscriptionPlanSettings.new(
+        plan_type: PlanSettingsType::FIXED_CYCLES,
+        fixed_cycles: 12,
+        fixed_cycle_amount: 112,
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
+      ),
       merchant_name: '管理画面ガイド',
       store_name: '管理画面ガイド_TEST店舗',
       payment_type: 'card',
@@ -57,6 +73,22 @@ subscription_list = SubscriptionList.new(
       currency: 'JPY',
       amount_formatted: 3000,
       status: SubscriptionStatus::CURRENT,
+      three_ds: SubscriptionThreeDs.new(
+        mode: SubscriptionThreeDsMode::NORMAL,
+        redirect_endpoint: nil,
+        redirect_id: nil,
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
+      ),
+      installment_plan: SubscriptionInstallmentPlanResponse.new(
+        plan_type: CombinedPlanType::FIXED_CYCLE_AMOUNT,
+        fixed_cycles: nil,
+        fixed_cycles_amount: 30000,
+        additional_properties: {
+          'exampleAdditionalProperty' => JSON.parse('{"key1":"val1","key2":"val2"}')
+        }
+      ),
       merchant_name: '管理画面ガイド',
       store_name: '管理画面ガイド_Online店舗',
       payment_type: 'card',

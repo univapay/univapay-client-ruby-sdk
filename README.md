@@ -36,16 +36,16 @@ We will assume that all requests are going to originate from a backend server th
 Install the gem from the command line:
 
 ```bash
-gem install univapay-client-sdk -v 1.1.0
+gem install univapay-client-sdk -v 1.2.0
 ```
 
 Or add the gem to your Gemfile and run `bundle`:
 
 ```ruby
-gem 'univapay-client-sdk', '1.1.0'
+gem 'univapay-client-sdk', '1.2.0'
 ```
 
-For additional gem details, see the [RubyGems page for the univapay-client-sdk gem](https://rubygems.org/gems/univapay-client-sdk/versions/1.1.0).
+For additional gem details, see the [RubyGems page for the univapay-client-sdk gem](https://rubygems.org/gems/univapay-client-sdk/versions/1.2.0).
 
 ## IRB Console Usage
 

@@ -104,6 +104,11 @@ end
   },
   "mode": "live",
   "created_on": "2024-06-26T01:51:28.627023Z",
+  "three_ds": {
+    "mode": "normal",
+    "redirect_endpoint": null,
+    "redirect_id": null
+  },
   "period": "monthly",
   "next_payment": {
     "id": "11ef3360-1f9a-c54a-8313-7f9847da313b",
@@ -198,10 +203,19 @@ end
       "status": "current",
       "mode": "live",
       "created_on": "2024-06-26T01:51:28.627023Z",
+      "three_ds": {
+        "mode": "normal",
+        "redirect_endpoint": null,
+        "redirect_id": null
+      },
       "schedule_settings": {
         "zone_id": "Asia/Tokyo",
         "retry_interval": "P7D",
         "termination_mode": "immediate"
+      },
+      "subscription_plan": {
+        "plan_type": "fixed_cycles",
+        "fixed_cycles": 12
       },
       "merchant_name": "管理画面ガイド",
       "store_name": "管理画面ガイド_TEST店舗",
@@ -224,10 +238,20 @@ end
       "status": "current",
       "mode": "live",
       "created_on": "2024-07-11T09:20:00.627023Z",
+      "three_ds": {
+        "mode": "normal",
+        "redirect_endpoint": null,
+        "redirect_id": null
+      },
       "schedule_settings": {
         "zone_id": "Asia/Tokyo",
         "retry_interval": "P7D",
         "termination_mode": "immediate"
+      },
+      "installment_plan": {
+        "plan_type": "fixed_cycle_amount",
+        "fixed_cycles": null,
+        "fixed_cycles_amount": 30000
       },
       "merchant_name": "管理画面ガイド",
       "store_name": "管理画面ガイド_Online店舗",
@@ -250,10 +274,20 @@ end
       "status": "suspended",
       "mode": "live",
       "created_on": "2024-08-15T13:05:22.627023Z",
+      "three_ds": {
+        "mode": "normal",
+        "redirect_endpoint": null,
+        "redirect_id": null
+      },
       "schedule_settings": {
         "zone_id": "Asia/Tokyo",
         "retry_interval": "P7D",
         "termination_mode": "on_next_payment"
+      },
+      "installment_plan": {
+        "plan_type": "revolving",
+        "fixed_cycles": null,
+        "fixed_cycles_amount": null
       },
       "merchant_name": "管理画面ガイド",
       "store_name": "管理画面ガイド_Osaka店舗",
@@ -445,10 +479,19 @@ end
       "status": "current",
       "mode": "live",
       "created_on": "2024-06-26T01:51:28.627023Z",
+      "three_ds": {
+        "mode": "normal",
+        "redirect_endpoint": null,
+        "redirect_id": null
+      },
       "schedule_settings": {
         "zone_id": "Asia/Tokyo",
         "retry_interval": "P7D",
         "termination_mode": "immediate"
+      },
+      "subscription_plan": {
+        "plan_type": "fixed_cycles",
+        "fixed_cycles": 12
       },
       "merchant_name": "管理画面ガイド",
       "store_name": "管理画面ガイド_TEST店舗",
@@ -471,6 +514,11 @@ end
       "status": "current",
       "mode": "live",
       "created_on": "2024-07-01T10:00:00.627023Z",
+      "three_ds": {
+        "mode": "normal",
+        "redirect_endpoint": null,
+        "redirect_id": null
+      },
       "schedule_settings": {
         "zone_id": "Asia/Tokyo",
         "retry_interval": "P7D",
@@ -497,10 +545,20 @@ end
       "status": "suspended",
       "mode": "live",
       "created_on": "2024-08-15T13:05:22.627023Z",
+      "three_ds": {
+        "mode": "normal",
+        "redirect_endpoint": null,
+        "redirect_id": null
+      },
       "schedule_settings": {
         "zone_id": "Asia/Tokyo",
         "retry_interval": "P7D",
         "termination_mode": "on_next_payment"
+      },
+      "installment_plan": {
+        "plan_type": "revolving",
+        "fixed_cycles": null,
+        "fixed_cycles_amount": null
       },
       "merchant_name": "管理画面ガイド",
       "store_name": "管理画面ガイド_TEST店舗",
@@ -693,6 +751,11 @@ end
   },
   "mode": "test",
   "created_on": "2024-06-26T01:51:28.627023Z",
+  "three_ds": {
+    "mode": "normal",
+    "redirect_endpoint": null,
+    "redirect_id": null
+  },
   "period": "monthly",
   "next_payment": {
     "id": "11ef335e-9ae2-8322-8e79-e7ba4b56234e",
@@ -706,7 +769,14 @@ end
     "created_on": "2024-06-26T01:51:29.025129Z",
     "updated_on": "2024-06-26T01:51:29.025129Z",
     "retry_date": null
-  }
+  },
+  "cycles_left": 5,
+  "subscription_plan": {
+    "plan_type": "fixed_cycles",
+    "fixed_cycles": 12
+  },
+  "amount_left": 6250,
+  "amount_left_formatted": 62.5
 }
 ```
 
@@ -809,6 +879,11 @@ end
   },
   "mode": "test",
   "created_on": "2024-06-26T01:51:28.627023Z",
+  "three_ds": {
+    "mode": "normal",
+    "redirect_endpoint": null,
+    "redirect_id": null
+  },
   "period": "monthly",
   "next_payment": {
     "id": "11ef335e-9ae2-8322-8e79-e7ba4b56234e",
@@ -1522,6 +1597,11 @@ end
   "status": "suspended",
   "mode": "test",
   "created_on": "2024-06-26T01:51:28.627023Z",
+  "three_ds": {
+    "mode": "normal",
+    "redirect_endpoint": null,
+    "redirect_id": null
+  },
   "period": "monthly"
 }
 ```
@@ -1607,6 +1687,11 @@ end
   "status": "unpaid",
   "mode": "test",
   "created_on": "2024-06-26T01:51:28.627023Z",
+  "three_ds": {
+    "mode": "normal",
+    "redirect_endpoint": null,
+    "redirect_id": null
+  },
   "period": "monthly"
 }
 ```
@@ -1699,6 +1784,11 @@ end
   "status": "current",
   "mode": "test",
   "created_on": "2024-06-26T01:51:28.627023Z",
+  "three_ds": {
+    "mode": "normal",
+    "redirect_endpoint": null,
+    "redirect_id": null
+  },
   "period": "monthly"
 }
 ```

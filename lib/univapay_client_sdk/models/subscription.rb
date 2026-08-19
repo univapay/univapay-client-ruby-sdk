@@ -78,13 +78,55 @@ module UnivapayClientSdk
     # @return [DateTime]
     attr_accessor :created_on
 
+    # 3-D Secure configuration and redirect details applied to the
+    # subscription's payments.
+    # @return [SubscriptionThreeDs]
+    attr_accessor :three_ds
+
     # Subscription Period schema.
     # @return [SubscriptionPeriod]
     attr_accessor :period
 
+    # ISO-8601 Duration for a custom billing frequency (e.g., P3D, P1M),
+    # returned instead of `period` when the subscription uses a custom cycle
+    # length rather than one of the fixed period presets. Mutually exclusive
+    # with `period` — exactly one of the two is present.
+    # @return [String]
+    attr_accessor :cyclical_period
+
     # Next scheduled payment details for a subscription.
     # @return [SubscriptionNextPayment]
     attr_accessor :next_payment
+
+    # Number of remaining billing cycles before the subscription completes. Only
+    # present for cycle-limited plans (`subscription_plan` or
+    # `installment_plan`); `null` for indefinite subscriptions.
+    # @return [Integer]
+    attr_accessor :cycles_left
+
+    # Configuration for limited-cycle subscriptions (Univapay side).
+    # @return [SubscriptionPlanSettings]
+    attr_accessor :subscription_plan
+
+    # Installment plan applied to the subscription, as returned by the API.
+    # Covers both card-network installment plans (`revolving`, `fixed_cycles`)
+    # and legacy fixed-amount installment plans (`fixed_cycle_amount`).
+    # @return [SubscriptionInstallmentPlanResponse]
+    attr_accessor :installment_plan
+
+    # Identifier of the charge associated with the subscription's installment
+    # plan. Only present when `installment_plan` is set.
+    # @return [UUID | String]
+    attr_accessor :charge_id
+
+    # Remaining amount to be charged over the life of the plan, in the smallest
+    # currency unit. Only present for cycle-limited plans.
+    # @return [Integer]
+    attr_accessor :amount_left
+
+    # `amount_left` formatted for display.
+    # @return [Float]
+    attr_accessor :amount_left_formatted
 
     # A mapping from model property names to API property names.
     def self.names
@@ -107,8 +149,16 @@ module UnivapayClientSdk
       @_hash['metadata'] = 'metadata'
       @_hash['mode'] = 'mode'
       @_hash['created_on'] = 'created_on'
+      @_hash['three_ds'] = 'three_ds'
       @_hash['period'] = 'period'
+      @_hash['cyclical_period'] = 'cyclical_period'
       @_hash['next_payment'] = 'next_payment'
+      @_hash['cycles_left'] = 'cycles_left'
+      @_hash['subscription_plan'] = 'subscription_plan'
+      @_hash['installment_plan'] = 'installment_plan'
+      @_hash['charge_id'] = 'charge_id'
+      @_hash['amount_left'] = 'amount_left'
+      @_hash['amount_left_formatted'] = 'amount_left_formatted'
       @_hash
     end
 
@@ -132,8 +182,16 @@ module UnivapayClientSdk
         metadata
         mode
         created_on
+        three_ds
         period
+        cyclical_period
         next_payment
+        cycles_left
+        subscription_plan
+        installment_plan
+        charge_id
+        amount_left
+        amount_left_formatted
       ]
     end
 
@@ -144,6 +202,11 @@ module UnivapayClientSdk
         initial_amount_formatted
         subsequent_cycles_start
         first_charge_capture_after
+        cyclical_period
+        cycles_left
+        charge_id
+        amount_left
+        amount_left_formatted
       ]
     end
 
@@ -153,8 +216,11 @@ module UnivapayClientSdk
                    subsequent_cycles_start: SKIP, schedule_settings: SKIP,
                    only_direct_currency: SKIP, first_charge_capture_after: SKIP,
                    first_charge_authorization_only: SKIP, status: SKIP,
-                   metadata: SKIP, mode: SKIP, created_on: SKIP, period: SKIP,
-                   next_payment: SKIP, additional_properties: nil)
+                   metadata: SKIP, mode: SKIP, created_on: SKIP, three_ds: SKIP,
+                   period: SKIP, cyclical_period: SKIP, next_payment: SKIP,
+                   cycles_left: SKIP, subscription_plan: SKIP,
+                   installment_plan: SKIP, charge_id: SKIP, amount_left: SKIP,
+                   amount_left_formatted: SKIP, additional_properties: nil)
       # Add additional model properties to the instance
       additional_properties = {} if additional_properties.nil?
 
@@ -181,8 +247,16 @@ module UnivapayClientSdk
       @metadata = metadata unless metadata == SKIP
       @mode = mode unless mode == SKIP
       @created_on = created_on unless created_on == SKIP
+      @three_ds = three_ds unless three_ds == SKIP
       @period = period unless period == SKIP
+      @cyclical_period = cyclical_period unless cyclical_period == SKIP
       @next_payment = next_payment unless next_payment == SKIP
+      @cycles_left = cycles_left unless cycles_left == SKIP
+      @subscription_plan = subscription_plan unless subscription_plan == SKIP
+      @installment_plan = installment_plan unless installment_plan == SKIP
+      @charge_id = charge_id unless charge_id == SKIP
+      @amount_left = amount_left unless amount_left == SKIP
+      @amount_left_formatted = amount_left_formatted unless amount_left_formatted == SKIP
       @additional_properties = additional_properties
     end
 
@@ -224,9 +298,21 @@ module UnivapayClientSdk
                    else
                      SKIP
                    end
+      three_ds = SubscriptionThreeDs.from_hash(hash['three_ds']) if hash['three_ds']
       period = hash.key?('period') ? hash['period'] : SKIP
+      cyclical_period =
+        hash.key?('cyclical_period') ? hash['cyclical_period'] : SKIP
       next_payment = SubscriptionNextPayment.from_hash(hash['next_payment']) if
         hash['next_payment']
+      cycles_left = hash.key?('cycles_left') ? hash['cycles_left'] : SKIP
+      subscription_plan = SubscriptionPlanSettings.from_hash(hash['subscription_plan']) if
+        hash['subscription_plan']
+      installment_plan = SubscriptionInstallmentPlanResponse.from_hash(hash['installment_plan']) if
+        hash['installment_plan']
+      charge_id = hash.key?('charge_id') ? hash['charge_id'] : SKIP
+      amount_left = hash.key?('amount_left') ? hash['amount_left'] : SKIP
+      amount_left_formatted =
+        hash.key?('amount_left_formatted') ? hash['amount_left_formatted'] : SKIP
 
       # Create a new hash for additional properties, removing known properties.
       new_hash = hash.reject { |k, _| names.value?(k) }
@@ -253,8 +339,16 @@ module UnivapayClientSdk
                        metadata: metadata,
                        mode: mode,
                        created_on: created_on,
+                       three_ds: three_ds,
                        period: period,
+                       cyclical_period: cyclical_period,
                        next_payment: next_payment,
+                       cycles_left: cycles_left,
+                       subscription_plan: subscription_plan,
+                       installment_plan: installment_plan,
+                       charge_id: charge_id,
+                       amount_left: amount_left,
+                       amount_left_formatted: amount_left_formatted,
                        additional_properties: additional_properties)
     end
 
@@ -286,8 +380,12 @@ module UnivapayClientSdk
       " schedule_settings: #{@schedule_settings}, only_direct_currency: #{@only_direct_currency},"\
       " first_charge_capture_after: #{@first_charge_capture_after},"\
       " first_charge_authorization_only: #{@first_charge_authorization_only}, status: #{@status},"\
-      " metadata: #{@metadata}, mode: #{@mode}, created_on: #{@created_on}, period: #{@period},"\
-      " next_payment: #{@next_payment}, additional_properties: #{@additional_properties}>"
+      " metadata: #{@metadata}, mode: #{@mode}, created_on: #{@created_on}, three_ds:"\
+      " #{@three_ds}, period: #{@period}, cyclical_period: #{@cyclical_period}, next_payment:"\
+      " #{@next_payment}, cycles_left: #{@cycles_left}, subscription_plan: #{@subscription_plan},"\
+      " installment_plan: #{@installment_plan}, charge_id: #{@charge_id}, amount_left:"\
+      " #{@amount_left}, amount_left_formatted: #{@amount_left_formatted}, additional_properties:"\
+      " #{@additional_properties}>"
     end
 
     # Provides a debugging-friendly string with detailed object information.
@@ -302,9 +400,13 @@ module UnivapayClientSdk
       " only_direct_currency: #{@only_direct_currency.inspect}, first_charge_capture_after:"\
       " #{@first_charge_capture_after.inspect}, first_charge_authorization_only:"\
       " #{@first_charge_authorization_only.inspect}, status: #{@status.inspect}, metadata:"\
-      " #{@metadata.inspect}, mode: #{@mode.inspect}, created_on: #{@created_on.inspect}, period:"\
-      " #{@period.inspect}, next_payment: #{@next_payment.inspect}, additional_properties:"\
-      " #{@additional_properties}>"
+      " #{@metadata.inspect}, mode: #{@mode.inspect}, created_on: #{@created_on.inspect},"\
+      " three_ds: #{@three_ds.inspect}, period: #{@period.inspect}, cyclical_period:"\
+      " #{@cyclical_period.inspect}, next_payment: #{@next_payment.inspect}, cycles_left:"\
+      " #{@cycles_left.inspect}, subscription_plan: #{@subscription_plan.inspect},"\
+      " installment_plan: #{@installment_plan.inspect}, charge_id: #{@charge_id.inspect},"\
+      " amount_left: #{@amount_left.inspect}, amount_left_formatted:"\
+      " #{@amount_left_formatted.inspect}, additional_properties: #{@additional_properties}>"
     end
   end
 end

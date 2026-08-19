@@ -30,8 +30,16 @@ Subscription entry returned in list responses.
 | `metadata` | [`GenericMetadata`](../../doc/models/generic-metadata.md) | Optional | A free-form dictionary for custom metadata. |
 | `mode` | [`ChargeMode`](../../doc/models/charge-mode.md) | Optional | Charge Mode schema. |
 | `created_on` | `DateTime` | Optional | Timestamp when the resource was created. |
+| `three_ds` | [`SubscriptionThreeDs`](../../doc/models/subscription-three-ds.md) | Optional | 3-D Secure configuration and redirect details applied to the subscription's payments. |
 | `period` | [`SubscriptionPeriod`](../../doc/models/subscription-period.md) | Optional | Subscription Period schema. |
+| `cyclical_period` | `String` | Optional | ISO-8601 Duration for a custom billing frequency (e.g., P3D, P1M), returned instead of `period` when the subscription uses a custom cycle length rather than one of the fixed period presets. Mutually exclusive with `period` — exactly one of the two is present. |
 | `next_payment` | [`SubscriptionNextPayment`](../../doc/models/subscription-next-payment.md) | Optional | Next scheduled payment details for a subscription. |
+| `cycles_left` | `Integer` | Optional | Number of remaining billing cycles before the subscription completes. Only present for cycle-limited plans (`subscription_plan` or `installment_plan`); `null` for indefinite subscriptions.<br><br>**Constraints**: `>= 0` |
+| `subscription_plan` | [`SubscriptionPlanSettings`](../../doc/models/subscription-plan-settings.md) | Optional | Configuration for limited-cycle subscriptions (Univapay side). |
+| `installment_plan` | [`SubscriptionInstallmentPlanResponse`](../../doc/models/subscription-installment-plan-response.md) | Optional | Installment plan applied to the subscription, as returned by the API. Covers both card-network installment plans (`revolving`, `fixed_cycles`) and legacy fixed-amount installment plans (`fixed_cycle_amount`). |
+| `charge_id` | `UUID \| String` | Optional | Identifier of the charge associated with the subscription's installment plan. Only present when `installment_plan` is set. |
+| `amount_left` | `Integer` | Optional | Remaining amount to be charged over the life of the plan, in the smallest currency unit. Only present for cycle-limited plans.<br><br>**Constraints**: `>= 0` |
+| `amount_left_formatted` | `Float` | Optional | `amount_left` formatted for display. |
 | `merchant_name` | `String` | Optional | Merchant display name. |
 | `store_name` | `String` | Optional | Store display name. |
 | `payment_type` | `String` | Optional | Payment method type. |
@@ -50,6 +58,15 @@ subscription_list_item = SubscriptionListItem.new(
   currency: 'USD',
   amount_formatted: 12.5,
   status: SubscriptionStatus::CURRENT,
+  three_ds: SubscriptionThreeDs.new(
+    mode: SubscriptionThreeDsMode::NORMAL,
+    redirect_endpoint: nil,
+    redirect_id: nil
+  ),
+  subscription_plan: SubscriptionPlanSettings.new(
+    plan_type: PlanSettingsType::FIXED_CYCLES,
+    fixed_cycles: 12
+  ),
   merchant_name: '管理画面ガイド',
   store_name: '管理画面ガイド_TEST店舗',
   payment_type: 'card',
