@@ -39,7 +39,7 @@ module UnivapayClientSdk
     # @return [TrueClass | FalseClass]
     attr_accessor :verified
 
-    # Merchant configuration snapshot serialized by gyron-payments-api.
+    # Merchant configuration snapshot as serialized by the backend.
     # @return [MerchantWebhookConfiguration]
     attr_accessor :configuration
 

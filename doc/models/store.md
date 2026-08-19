@@ -16,7 +16,7 @@ Store resource returned by the backend `FullStore` formatter. It combines core s
 | `id` | `UUID \| String` | Optional | Store identifier. |
 | `name` | `String` | Optional | Store display name. |
 | `created_on` | `DateTime` | Optional | Timestamp when the store was created. |
-| `configuration` | [`MerchantWebhookConfiguration`](../../doc/models/merchant-webhook-configuration.md) | Optional | Store-scoped configuration snapshot serialized by gyron-payments-api. It uses the same flattened serializer as merchant configuration, but omits `transfer_schedule`. |
+| `configuration` | [`MerchantWebhookConfiguration`](../../doc/models/merchant-webhook-configuration.md) | Optional | Store-scoped configuration snapshot as serialized by the backend. It uses the same flattened serializer as merchant configuration, but omits `transfer_schedule`. |
 | `additional_properties` | `Hash[String, Object]` | Optional | - |
 
 ## Example

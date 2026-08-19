@@ -4,7 +4,7 @@
 # by APIMATIC v3.0 ( https://www.apimatic.io ).
 
 module UnivapayClientSdk
-  # Merchant configuration object serialized by gyron-payments-api.
+  # Merchant configuration object as serialized by the backend.
   class MerchantWebhookConfiguration < BaseModel
     SKIP = Object.new
     private_constant :SKIP

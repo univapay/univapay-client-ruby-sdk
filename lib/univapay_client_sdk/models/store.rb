@@ -24,8 +24,8 @@ module UnivapayClientSdk
     # @return [DateTime]
     attr_accessor :created_on
 
-    # Store-scoped configuration snapshot serialized by gyron-payments-api. It
-    # uses the same flattened serializer as merchant configuration, but omits
+    # Store-scoped configuration snapshot as serialized by the backend. It uses
+    # the same flattened serializer as merchant configuration, but omits
     # `transfer_schedule`.
     # @return [MerchantWebhookConfiguration]
     attr_accessor :configuration
